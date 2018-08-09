@@ -50,12 +50,12 @@ class CreatePayrollTable extends Migration
             $table->user();
             $table->belongsTo('payrolls');
             
-            $table->amount('total_earning')->comment('Total Earning')
-            $table->amount('total_deduction')->comment('Total Deduction')
+            $table->amount('total_earning')->comment('Total Earning');
+            $table->amount('total_deduction')->comment('Total Deduction');
 
-            $table->amount('basic_salary')->comment('Total Basic Salary')
-            $table->amount('gross_salary')->comment('Total Gross Salary')
-            $table->amount('net_salary')->comment('Total Net Salary')
+            $table->amount('basic_salary')->comment('Total Basic Salary');
+            $table->amount('gross_salary')->comment('Total Gross Salary');
+            $table->amount('net_salary')->comment('Total Net Salary');
 
             $table->addAcceptance('verified');
             $table->addAcceptance('approved');
