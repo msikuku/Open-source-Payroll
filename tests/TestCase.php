@@ -2,6 +2,8 @@
 
 namespace CleaniqueCoders\OpenPayroll\Tests;
 
+use Illuminate\Support\Facades\Schema;
+
 class TestCase extends \Orchestra\Testbench\TestCase
 {
     /**
@@ -11,9 +13,12 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         parent::setUp();
 
-        // $this->loadLaravelMigrations(['--database' => 'testbench']);
+        $this->artisan('vendor:publish', ['--tag' => 'config']);
 
-        // $this->artisan('migrate', ['--database' => 'testbench']);
+        $this->loadLaravelMigrations(['--database' => 'testbench']);
+        
+        $this->artisan('config:clear');
+        $this->artisan('migrate', ['--database' => 'testbench']);
     }
 
     /**
@@ -27,6 +32,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         return [
             \CleaniqueCoders\OpenPayroll\OpenPayrollServiceProvider::class,
+            \CleaniqueCoders\Blueprint\Macro\BlueprintMacroServiceProvider::class,
         ];
     }
 
