@@ -1,16 +1,21 @@
 
-[![Build Status](https://travis-ci.org/cleanique-coders/open-payroll.svg?branch=master)](https://travis-ci.org/cleanique-coders/open-payroll) [![Latest Stable Version](https://poser.pugx.org/cleanique-coders/open-payroll/v/stable)](https://packagist.org/packages/cleanique-coders/open-payroll) [![Total Downloads](https://poser.pugx.org/cleanique-coders/open-payroll/downloads)](https://packagist.org/packages/cleanique-coders/open-payroll) [![License](https://poser.pugx.org/cleanique-coders/open-payroll/license)](https://packagist.org/packages/cleanique-coders/open-payroll)
+[![Build Status](https://travis-ci.org/cleaniquecoders/open-payroll.svg?branch=master)](https://travis-ci.org/cleaniquecoders/open-payroll) [![Latest Stable Version](https://poser.pugx.org/cleaniquecoders/open-payroll/v/stable)](https://packagist.org/packages/cleaniquecoders/open-payroll) [![Total Downloads](https://poser.pugx.org/cleaniquecoders/open-payroll/downloads)](https://packagist.org/packages/cleaniquecoders/open-payroll) [![License](https://poser.pugx.org/cleaniquecoders/open-payroll/license)](https://packagist.org/packages/cleaniquecoders/open-payroll)
 
 ## About Your Package
 
-Tell people about your package
+Open Payroll handle the calculation need to be done for your employees.
+
+Features provided by Open Payroll:
+
+1. Automated montly payroll calculation (require cron / scheduler)
+2. Enable to include more earnings / deductions for the employee
 
 ## Installation
 
-1. In order to install `cleanique-coders/open-payroll` in your Laravel project, just run the *composer require* command from your terminal:
+1. In order to install `cleaniquecoders/open-payroll` in your Laravel project, just run the *composer require* command from your terminal:
 
 ```
-$ composer require cleanique-coders/open-payroll
+$ composer require cleaniquecoders/open-payroll
 ```
 
 2. Then in your `config/app.php` add the following to the providers array:
@@ -39,7 +44,7 @@ $ vendor/bin/phpunit -v --coverage-text --colors=never --stderr
 
 ## Contributing
 
-Thank you for considering contributing to the `cleanique-coders/open-payroll`!
+Thank you for considering contributing to the `cleaniquecoders/open-payroll`!
 
 ### Bug Reports
 
@@ -51,7 +56,7 @@ Remember, bug reports are created in the hope that others with the same problem 
 
 ## Coding Style
 
-`cleanique-coders/open-payroll` follows the PSR-2 coding standard and the PSR-4 autoloading standard. 
+`cleaniquecoders/open-payroll` follows the PSR-2 coding standard and the PSR-4 autoloading standard. 
 
 You may use PHP CS Fixer in order to keep things standardised. PHP CS Fixer configuration can be found in `.php_cs`.
 
