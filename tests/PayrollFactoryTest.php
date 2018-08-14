@@ -65,4 +65,43 @@ class PayrollFactoryTest extends TestCase
 
         \DB::table('payrolls')->truncate();
     }
+
+    /** @test */
+    public function it_can_insert_payslip_data()
+    {
+        $user = \DB::table('users')->first();
+
+        \DB::table('payrolls')->insert([
+            'user_id' => $user->id,
+            'month'   => 1,
+            'year'    => 2018,
+            'date'    => '2018-08-1',
+        ]);
+
+        $payroll = \DB::table('payrolls')->first();
+
+        \DB::table('users')->get()->each(function ($user) use ($payroll) {
+            \DB::table('payslips')->insert([
+	            'user_id' => $user->id,
+	            'payroll_id' => $payroll->id,
+	            'total_earning'   => 900000,
+		        'total_deduction' => 0,
+		        'basic_salary'    => 900000,
+		        'gross_salary'    => 900000,
+		        'net_salary'      => 900000,
+	        ]);
+        });
+
+        \DB::table('users')->get()->each(function ($user) use ($payroll) {
+        	$this->assertDatabaseHas('payslips', [
+	            'user_id' => $user->id,
+	            'payroll_id' => $payroll->id,
+	            'total_earning'   => 900000,
+		        'total_deduction' => 0,
+		        'basic_salary'    => 900000,
+		        'gross_salary'    => 900000,
+		        'net_salary'      => 900000,
+	        ]);
+        });
+    }
 }
