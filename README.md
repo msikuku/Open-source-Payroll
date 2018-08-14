@@ -1,14 +1,13 @@
 
+<p align="center">
+    <img width="300px" src="resources/img/OpenPayroll.png" alt="OpenPayroll"/>
+</p>
+
 [![Build Status](https://travis-ci.org/cleaniquecoders/open-payroll.svg?branch=master)](https://travis-ci.org/cleaniquecoders/open-payroll) [![Latest Stable Version](https://poser.pugx.org/cleaniquecoders/open-payroll/v/stable)](https://packagist.org/packages/cleaniquecoders/open-payroll) [![Total Downloads](https://poser.pugx.org/cleaniquecoders/open-payroll/downloads)](https://packagist.org/packages/cleaniquecoders/open-payroll) [![License](https://poser.pugx.org/cleaniquecoders/open-payroll/license)](https://packagist.org/packages/cleaniquecoders/open-payroll)
 
 ## About Your Package
 
-Open Payroll handle the calculation need to be done for your employees.
-
-Features provided by Open Payroll:
-
-1. Automated montly payroll calculation (require cron / scheduler)
-2. Enable to include more earnings / deductions for the employee
+> Stay tuned!
 
 ## Installation
 
