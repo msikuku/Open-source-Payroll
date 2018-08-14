@@ -10,21 +10,21 @@ class Deduction extends Model
 
     public function user()
     {
-        return $this->belongsTo(config('payroll.models.user'));
+        return $this->belongsTo(config('open-payroll.models.user'));
     }
 
     public function payroll()
     {
-        return $this->belongsTo(config('payroll.models.payroll'));
+        return $this->belongsTo(config('open-payroll.models.payroll'));
     }
 
     public function payslip()
     {
-        return $this->belongsTo(config('payroll.models.payslip'));
+        return $this->belongsTo(config('open-payroll.models.payslip'));
     }
 
     public function type()
     {
-        return $this->hasOne(config('payroll.models.deduction_types'));
+        return $this->hasOne(config('open-payroll.models.deduction_types'));
     }
 }

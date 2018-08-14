@@ -15,7 +15,7 @@ class OpenPayrollServiceProvider extends ServiceProvider
          * Configuration
          */
         $this->publishes([
-            __DIR__ . '/../config/payroll.php' => config_path('payroll.php'),
+            __DIR__ . '/../config/open-payroll.php' => config_path('open-payroll.php'),
         ], 'open-payroll-config');
 
         /*

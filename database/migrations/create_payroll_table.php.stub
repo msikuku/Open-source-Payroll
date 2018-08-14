@@ -119,7 +119,7 @@ class CreatePayrollTable extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        foreach (config('payroll.tables.names') as $table) {
+        foreach (config('open-payroll.tables.names') as $table) {
             Schema::dropIfExists($table);
         }
         Schema::enableForeignKeyConstraints();

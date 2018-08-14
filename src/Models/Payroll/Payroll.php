@@ -13,16 +13,16 @@ class Payroll extends Model
 
     public function user()
     {
-        return $this->belongsTo(config('payroll.models.user'));
+        return $this->belongsTo(config('open-payroll.models.user'));
     }
 
     public function payslips()
     {
-        return $this->hasMany(config('payroll.models.payslip'));
+        return $this->hasMany(config('open-payroll.models.payslip'));
     }
 
     public function status()
     {
-        return $this->hasOne(config('payroll.models.payroll_status'));
+        return $this->hasOne(config('open-payroll.models.payroll_status'));
     }
 }
