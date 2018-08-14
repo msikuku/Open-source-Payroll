@@ -12,9 +12,10 @@ class TestCase extends \Orchestra\Testbench\TestCase
     public function setUp()
     {
         parent::setUp();
+        $this->withFactories(realpath(__DIR__ . '/../factories'));
         $this->cleanUp();
         $this->publish();
-        $this->artisan('config:clear');
+        $this->clearCaches();
         $this->migrate();
     }
 
@@ -22,6 +23,60 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         $this->cleanUp();
         parent::tearDown();
+    }
+
+    public function migrate()
+    {
+        $this->loadLaravelMigrations(['--database' => 'testbench']);
+        $this->artisan('migrate', ['--database' => 'testbench']);
+    }
+
+    public function seedTest()
+    {
+        $this->artisan('db:seed', ['--class' => 'PayrollSeeder']);
+    }
+
+    /**
+     * Seed.
+     */
+    public function seedUsers()
+    {
+        $now = \Carbon\Carbon::now();
+        \DB::table('users')->insert([
+            'name'       => 'OpenPayroll',
+            'email'      => 'hello@open-payroll.com',
+            'password'   => \Hash::make('456'),
+            'created_at' => $now,
+            'updated_at' => $now,
+        ]);
+
+        \DB::table('users')->insert([
+            'name'       => 'OpenPayroll',
+            'email'      => 'hi@open-payroll.com',
+            'password'   => \Hash::make('456'),
+            'created_at' => $now,
+            'updated_at' => $now,
+        ]);
+    }
+
+    public function truncateUsersTable()
+    {
+        \DB::table('users')->truncate();
+    }
+
+    /** @test */
+    public function it_has_users()
+    {
+        $this->truncateUsersTable();
+        $this->seedUsers();
+
+        $user = \DB::table('users')->where('id', '=', 2)->first();
+        $this->assertEquals('hi@open-payroll.com', $user->email);
+        $this->assertTrue(\Hash::check('456', $user->password));
+
+        $user = \DB::table('users')->where('id', '=', 1)->first();
+        $this->assertEquals('hello@open-payroll.com', $user->email);
+        $this->assertTrue(\Hash::check('456', $user->password));
     }
 
     /**
@@ -134,12 +189,18 @@ class TestCase extends \Orchestra\Testbench\TestCase
     private function cleanUp()
     {
         $this->removeMigrationFiles();
+        $this->removeSeederFiles();
         $this->removeIfExist(config_path('payroll.php'));
+    }
+
+    private function clearCaches()
+    {
+        $this->artisan('config:clear');
     }
 
     private function removeMigrationFiles()
     {
-        if(class_exists('CreatePayrollTable')) {
+        if (class_exists('CreatePayrollTable')) {
             collect(glob(database_path('migrations/*.php')))
                 ->each(function ($path) {
                     $this->removeIfExist($path);
@@ -147,7 +208,18 @@ class TestCase extends \Orchestra\Testbench\TestCase
         }
     }
 
-    private function removeIfExist($path) {
+    private function removeSeederFiles()
+    {
+        if (class_exists('PayrollTestSeeder') || class_exists('PayrollSeeder')) {
+            collect(glob(database_path('seeds/*.php')))
+                ->each(function ($path) {
+                    $this->removeIfExist($path);
+                });
+        }
+    }
+
+    private function removeIfExist($path)
+    {
         if (file_exists($path)) {
             unlink($path);
         }
@@ -157,18 +229,17 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         $this->artisan('vendor:publish', [
             '--force' => true,
-            '--tag' => 'open-payroll-config'
+            '--tag'   => 'open-payroll-config',
         ]);
 
         $this->artisan('vendor:publish', [
             '--force' => true,
-            '--tag' => 'open-payroll-migrations'
+            '--tag'   => 'open-payroll-migrations',
         ]);
-    }
 
-    private function migrate()
-    {
-        $this->loadLaravelMigrations(['--database' => 'testbench']);
-        $this->artisan('migrate', ['--database' => 'testbench']);
+        $this->artisan('vendor:publish', [
+            '--force' => true,
+            '--tag'   => 'open-payroll-seeders',
+        ]);
     }
 }
