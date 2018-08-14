@@ -16,7 +16,7 @@ class OpenPayrollServiceProvider extends ServiceProvider
          */
         $this->publishes([
             __DIR__ . '/../config/payroll.php' => config_path('payroll.php'),
-        ], 'config');
+        ], 'open-payroll-config');
 
         /*
          * Migration
@@ -24,32 +24,26 @@ class OpenPayrollServiceProvider extends ServiceProvider
         if (! class_exists('CreatePayrollTable')) {
             $this->publishes([
                 __DIR__ . '/../database/migrations/create_payroll_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_payroll_table.php'),
-            ], 'migrations');
+            ], 'open-payroll-migrations');
         }
 
         /*
          * Seeders
          */
-        if (! class_exists('EarningTypeTableSeeder')) {
+        if (! class_exists('PayrollSeeder')) {
             $this->publishes([
-                __DIR__ . '/../database/seeds/EarningTypeTableSeeder.php' => database_path('seeds/EarningTypeTableSeeder.php'),
-            ], 'seeders');
-        }
-
-        if (! class_exists('DeductionTypeTableSeeder')) {
-            $this->publishes([
-                __DIR__ . '/../database/seeds/DeductionTypeTableSeeder.php' => database_path('seeds/DeductionTypeTableSeeder.php'),
-            ], 'seeders');
+                __DIR__ . '/../database/seeds/PayrollSeeder.php' => database_path('seeds/PayrollSeeder.php'),
+            ], 'open-payroll-seeders');
         }
 
         /*
          * Views
          */
-        $this->publishes([
-            __DIR__ . '/../resources/views' => resource_path('views/vendor/payroll'),
-        ], 'views');
+        // $this->publishes([
+        //     __DIR__ . '/../resources/views' => resource_path('views/vendor/payroll'),
+        // ], self::PACKAGE_PREFIX);
 
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'payroll');
+        // $this->loadViewsFrom(__DIR__ . '/../resources/views', 'payroll');
     }
 
     /**
