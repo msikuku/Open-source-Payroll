@@ -12,13 +12,16 @@ class TestCase extends \Orchestra\Testbench\TestCase
     public function setUp()
     {
         parent::setUp();
-
-        $this->artisan('vendor:publish', ['--tag' => 'config']);
-
-        $this->loadLaravelMigrations(['--database' => 'testbench']);
-        
+        $this->cleanUp();
+        $this->publish();
         $this->artisan('config:clear');
-        $this->artisan('migrate', ['--database' => 'testbench']);
+        $this->migrate();
+    }
+
+    protected function tearDown()
+    {
+        $this->cleanUp();
+        parent::tearDown();
     }
 
     /**
@@ -32,6 +35,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         return [
             \CleaniqueCoders\OpenPayroll\OpenPayrollServiceProvider::class,
+            \CleaniqueCoders\LaravelObservers\LaravelObserversServiceProvider::class,
+            \CleaniqueCoders\LaravelHelper\LaravelHelperServiceProvider::class,
             \CleaniqueCoders\Blueprint\Macro\BlueprintMacroServiceProvider::class,
         ];
     }
@@ -73,5 +78,97 @@ class TestCase extends \Orchestra\Testbench\TestCase
         collect($columns)->each(function ($column) use ($table) {
             $this->assertTrue(Schema::hasColumn($table, $column));
         });
+    }
+
+    /**
+     * Assert has helper.
+     *
+     * @param string $helper helper name
+     */
+    protected function assertHasHelper($helper)
+    {
+        $this->assertTrue(function_exists($helper));
+    }
+
+    /**
+     * Assert has config.
+     *
+     * @param string $config config name
+     */
+    protected function assertHasConfig($config)
+    {
+        $this->assertFileExists(config_path($config . '.php'));
+    }
+
+    /**
+     * Assert has migration.
+     *
+     * @param string $migration migration name
+     */
+    protected function assertHasMigration($migration)
+    {
+        $this->assertHasClass($migration);
+    }
+
+    /**
+     * Assert has class.
+     *
+     * @param string $class class name
+     */
+    protected function assertHasClass($class)
+    {
+        $this->assertTrue(class_exists($class));
+    }
+
+    /**
+     * Assert has class method exist.
+     *
+     * @param string $object object
+     * @param string $method method
+     */
+    protected function assertHasClassMethod($object, $method)
+    {
+        $this->assertTrue(method_exists($object, $method));
+    }
+
+    private function cleanUp()
+    {
+        $this->removeMigrationFiles();
+        $this->removeIfExist(config_path('payroll.php'));
+    }
+
+    private function removeMigrationFiles()
+    {
+        if(class_exists('CreatePayrollTable')) {
+            collect(glob(database_path('migrations/*.php')))
+                ->each(function ($path) {
+                    $this->removeIfExist($path);
+                });
+        }
+    }
+
+    private function removeIfExist($path) {
+        if (file_exists($path)) {
+            unlink($path);
+        }
+    }
+
+    private function publish()
+    {
+        $this->artisan('vendor:publish', [
+            '--force' => true,
+            '--tag' => 'open-payroll-config'
+        ]);
+
+        $this->artisan('vendor:publish', [
+            '--force' => true,
+            '--tag' => 'open-payroll-migrations'
+        ]);
+    }
+
+    private function migrate()
+    {
+        $this->loadLaravelMigrations(['--database' => 'testbench']);
+        $this->artisan('migrate', ['--database' => 'testbench']);
     }
 }
