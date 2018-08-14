@@ -59,9 +59,20 @@ class TestCase extends \Orchestra\Testbench\TestCase
         ]);
     }
 
+    public function seedPayrollSeeder()
+    {
+        $this->artisan('db:seed', ['--class' => 'PayrollSeeder']);
+    }
+
     public function truncateUsersTable()
     {
         \DB::table('users')->truncate();
+    }
+
+    public function reseedUsers()
+    {
+        $this->truncateUsersTable();
+        $this->seedUsers();
     }
 
     /** @test */
@@ -77,6 +88,71 @@ class TestCase extends \Orchestra\Testbench\TestCase
         $user = \DB::table('users')->where('id', '=', 1)->first();
         $this->assertEquals('hello@open-payroll.com', $user->email);
         $this->assertTrue(\Hash::check('456', $user->password));
+    }
+
+    public function cleanUp()
+    {
+        $this->removeMigrationFiles();
+        $this->removeSeederFiles();
+        $this->removeIfExist(config_path('payroll.php'));
+    }
+
+    public function clearCaches()
+    {
+        $this->artisan('config:clear');
+    }
+
+    public function republish()
+    {
+        $this->cleanUp();
+        $this->clearCaches();
+        $this->publish();
+        $this->clearCaches();
+    }
+
+    public function removeMigrationFiles()
+    {
+        if (class_exists('CreatePayrollTable')) {
+            collect(glob(database_path('migrations/*.php')))
+                ->each(function ($path) {
+                    $this->removeIfExist($path);
+                });
+        }
+    }
+
+    public function removeSeederFiles()
+    {
+        if (class_exists('PayrollTestSeeder') || class_exists('PayrollSeeder')) {
+            collect(glob(database_path('seeds/*.php')))
+                ->each(function ($path) {
+                    $this->removeIfExist($path);
+                });
+        }
+    }
+
+    public function removeIfExist($path)
+    {
+        if (file_exists($path)) {
+            unlink($path);
+        }
+    }
+
+    public function publish()
+    {
+        $this->artisan('vendor:publish', [
+            '--force' => true,
+            '--tag'   => 'open-payroll-config',
+        ]);
+
+        $this->artisan('vendor:publish', [
+            '--force' => true,
+            '--tag'   => 'open-payroll-migrations',
+        ]);
+
+        $this->artisan('vendor:publish', [
+            '--force' => true,
+            '--tag'   => 'open-payroll-seeders',
+        ]);
     }
 
     /**
@@ -184,62 +260,5 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected function assertHasClassMethod($object, $method)
     {
         $this->assertTrue(method_exists($object, $method));
-    }
-
-    private function cleanUp()
-    {
-        $this->removeMigrationFiles();
-        $this->removeSeederFiles();
-        $this->removeIfExist(config_path('payroll.php'));
-    }
-
-    private function clearCaches()
-    {
-        $this->artisan('config:clear');
-    }
-
-    private function removeMigrationFiles()
-    {
-        if (class_exists('CreatePayrollTable')) {
-            collect(glob(database_path('migrations/*.php')))
-                ->each(function ($path) {
-                    $this->removeIfExist($path);
-                });
-        }
-    }
-
-    private function removeSeederFiles()
-    {
-        if (class_exists('PayrollTestSeeder') || class_exists('PayrollSeeder')) {
-            collect(glob(database_path('seeds/*.php')))
-                ->each(function ($path) {
-                    $this->removeIfExist($path);
-                });
-        }
-    }
-
-    private function removeIfExist($path)
-    {
-        if (file_exists($path)) {
-            unlink($path);
-        }
-    }
-
-    private function publish()
-    {
-        $this->artisan('vendor:publish', [
-            '--force' => true,
-            '--tag'   => 'open-payroll-config',
-        ]);
-
-        $this->artisan('vendor:publish', [
-            '--force' => true,
-            '--tag'   => 'open-payroll-migrations',
-        ]);
-
-        $this->artisan('vendor:publish', [
-            '--force' => true,
-            '--tag'   => 'open-payroll-seeders',
-        ]);
     }
 }

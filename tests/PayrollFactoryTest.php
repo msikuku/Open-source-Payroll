@@ -9,6 +9,13 @@ class PayrollFactoryTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function setUp()
+    {
+        parent::setUp();
+        $this->seedPayrollSeeder();
+        $this->reseedUsers();
+    }
+
     /** @test */
     public function it_has_seeders()
     {
@@ -19,7 +26,6 @@ class PayrollFactoryTest extends TestCase
     /** @test */
     public function it_has_references_data()
     {
-        $this->artisan('db:seed', ['--class' => 'PayrollSeeder']);
         $tables = config('open-payroll.tables.names');
 
         foreach ($tables as $table) {
@@ -36,5 +42,27 @@ class PayrollFactoryTest extends TestCase
                 ]);
             }
         }
+    }
+
+    /** @test */
+    public function it_can_insert_payroll_data()
+    {
+        $user = \DB::table('users')->first();
+
+        \DB::table('payrolls')->insert([
+            'user_id' => $user->id,
+            'month'   => 1,
+            'year'    => 2018,
+            'date'    => '2018-08-1',
+        ]);
+
+        $this->assertDatabaseHas('payrolls', [
+            'user_id' => $user->id,
+            'month'   => 1,
+            'year'    => 2018,
+            'date'    => '2018-08-1',
+        ]);
+
+        \DB::table('payrolls')->truncate();
     }
 }
