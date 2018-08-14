@@ -1,6 +1,6 @@
 <?php
 
-namespace CleaniqueCoders\OpenPayroll\Models;
+namespace CleaniqueCoders\OpenPayroll\Models\Payslip;
 
 use Illuminate\Database\Eloquent\Model;
 
