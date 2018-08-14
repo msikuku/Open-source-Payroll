@@ -1,0 +1,27 @@
+image: nasrulhazim/php72-oci8
+
+# Cache libraries in between jobs
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+  - vendor/
+
+before_script:
+ # Setup .env
+ - cp .env.example .env
+
+# Export Environment
+ - export APP_ENV=testing
+ - export DB_CONNECTION=sqlite
+ - export DB_DATABASE=database/database.sqlite
+ 
+ # Install Dependencies
+ - composer install
+
+ # Generate APP_KEY && JWT_SECRET
+ - touch database/database.sqlite
+
+test:
+  script:
+  # run laravel tests
+  - vendor/bin/phpunit --testdox --verbose
