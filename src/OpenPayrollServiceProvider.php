@@ -36,6 +36,12 @@ class OpenPayrollServiceProvider extends ServiceProvider
             ], 'open-payroll-seeders');
         }
 
+        if (! class_exists('PayrollTestSeeder')) {
+            $this->publishes([
+                __DIR__ . '/../database/seeds/PayrollTestSeeder.php' => database_path('seeds/PayrollTestSeeder.php'),
+            ], 'open-payroll-seeders');
+        }
+
         /*
          * Views
          */
