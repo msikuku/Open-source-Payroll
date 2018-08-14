@@ -1,8 +1,8 @@
 <?php
 
 if (! function_exists('payroll')) {
-    function payroll($hashslug = null)
+    function payroll()
     {
-        return \CleaniqueCoders\OpenPayroll\Processors\PayrollProcessor::make($hashslug);
+        return \CleaniqueCoders\OpenPayroll\Processors\PayrollProcessor::make();
     }
 }

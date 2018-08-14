@@ -2,19 +2,14 @@
 
 namespace CleaniqueCoders\OpenPayroll\Processors;
 
-use CleaniqueCoders\OpenPayroll\Models\Payroll;
-
 class PayrollProcessor
 {
-    protected $payroll;
-
-    public function __construct($hashslug = null)
+    public function __construct()
     {
-        $this->payroll = Payroll::withDetails()->findByHashSlug();
     }
 
-    public static function make($hashslug = null)
+    public static function make()
     {
-        return new static($hashslug);
+        return new static();
     }
 }
