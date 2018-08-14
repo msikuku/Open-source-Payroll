@@ -11,39 +11,55 @@ class CreatePayrollTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('payroll.tables.prefix') . 'payroll_statuses', function (Blueprint $table) {
+        /** References Data */
+        Schema::create('payroll_statuses', function (Blueprint $table) {
             $table->increments('id');
             $table->name();
             $table->code();
+            $table->is('locked');
             $table->timestamps();
         });
 
-        Schema::create(config('payroll.tables.prefix') . 'deduction_types', function (Blueprint $table) {
+        Schema::create('payslip_statuses', function (Blueprint $table) {
             $table->increments('id');
             $table->name();
             $table->code();
+            $table->is('locked');
             $table->timestamps();
         });
 
-        Schema::create(config('payroll.tables.prefix') . 'earning_types', function (Blueprint $table) {
+        Schema::create('deduction_types', function (Blueprint $table) {
             $table->increments('id');
             $table->name();
             $table->code();
+            $table->is('locked');
             $table->timestamps();
         });
 
-        Schema::create(config('payroll.tables.prefix') . 'payrolls', function (Blueprint $table) {
+        Schema::create('earning_types', function (Blueprint $table) {
+            $table->increments('id');
+            $table->name();
+            $table->code();
+            $table->is('locked');
+            $table->timestamps();
+        });
+
+        Schema::create('payrolls', function (Blueprint $table) {
             $table->increments('id');
             $table->hashslug();
+
             $table->user();
-            $table->date('month')->comment('Payroll for Month');
-            $table->date('day')->comment('Pay Day');
-            $table->integer('number_of_employees')->nullable();
-            $table->addAcceptance('locked');
+            
+            $table->unsignedTinyInteger('month')->comment('Payroll for Month');
+            $table->unsignedSmallInteger('year')->comment('Payroll for Year');
+            $table->date('date')->comment('Pay Date / Pay Day');
+
+            $table->is('locked', false);
+
             $table->standardTime();
         });
 
-        Schema::create(config('payroll.tables.prefix') . 'payslips', function (Blueprint $table) {
+        Schema::create('payslips', function (Blueprint $table) {
             $table->increments('id');
             $table->hashslug();
             
@@ -59,16 +75,18 @@ class CreatePayrollTable extends Migration
 
             $table->addAcceptance('verified');
             $table->addAcceptance('approved');
+            $table->addAcceptance('locked');
 
             $table->standardTime();
         });
 
-        Schema::create(config('payroll.tables.prefix') . 'payslip_earnings', function (Blueprint $table) {
+        Schema::create('earnings', function (Blueprint $table) {
             $table->increments('id');
             $table->hashslug();
 
             $table->user();
             $table->belongsTo('payrolls');
+            $table->belongsTo('payslips');
             $table->belongsTo('earning_types');
 
             $table->name();
@@ -78,12 +96,13 @@ class CreatePayrollTable extends Migration
             $table->standardTime();
         });
 
-        Schema::create(config('payroll.tables.prefix') . 'payslip_deductions', function (Blueprint $table) {
+        Schema::create('deductions', function (Blueprint $table) {
             $table->increments('id');
             $table->hashslug();
 
             $table->user();
             $table->belongsTo('payrolls');
+            $table->belongsTo('payslips');
             $table->belongsTo('deduction_types');
 
             $table->name();
@@ -101,7 +120,7 @@ class CreatePayrollTable extends Migration
     {
         Schema::disableForeignKeyConstraints();
         foreach (config('payroll.tables.names') as $table) {
-            Schema::dropIfExists(config('payroll.tables.prefix') . $table);
+            Schema::dropIfExists($table);
         }
         Schema::enableForeignKeyConstraints();
     }
