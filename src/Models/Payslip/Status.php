@@ -1,11 +1,11 @@
 <?php
 
-namespace CleaniqueCoders\OpenPayroll\Models\Payroll;
+namespace CleaniqueCoders\OpenPayroll\Models\Payslip;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Status extends Model
 {
     protected $guarded = ['id'];
-    protected $table   = 'payroll_statuses';
+    protected $table   = 'payslip_statuses';
 }
