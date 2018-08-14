@@ -3,20 +3,12 @@
 
 use Faker\Generator as Faker;
 
-// 'payroll'         => \CleaniqueCoders\OpenPayroll\Models\Payroll\Payroll::class,
-// 'payslip'         => \CleaniqueCoders\OpenPayroll\Models\Payslip\Payslip::class,
-// 'deduction'       => \CleaniqueCoders\OpenPayroll\Models\Deduction\Deduction::class,
-// 'earning'         => \CleaniqueCoders\OpenPayroll\Models\Earning\Earning::class,
-// Payrolls
-// Payslips
-// Earnings
-// Deductions
-$factory->define(config('open-payroll.models.payroll'), function (Faker $faker) {
+$factory->define(\CleaniqueCoders\OpenPayroll\Models\Payroll\Payroll::class, function (Faker $faker) {
     return [
     ];
 });
 
-$factory->define(config('open-payroll.models.payslip'), function (Faker $faker) {
+$factory->define(\CleaniqueCoders\OpenPayroll\Models\Payslip\Payslip::class, function (Faker $faker) {
     return [
         'total_earning'   => 0,
         'total_deduction' => 0,
@@ -26,7 +18,7 @@ $factory->define(config('open-payroll.models.payslip'), function (Faker $faker) 
     ];
 });
 
-$factory->define(config('open-payroll.models.deduction'), function (Faker $faker) {
+$factory->define(\CleaniqueCoders\OpenPayroll\Models\Deduction\Deduction::class, function (Faker $faker) {
     return [
         'name'              => $faker->sentence,
         'description'       => $faker->sentence,
@@ -35,7 +27,7 @@ $factory->define(config('open-payroll.models.deduction'), function (Faker $faker
     ];
 });
 
-$factory->define(config('open-payroll.models.earning'), function (Faker $faker) {
+$factory->define(\CleaniqueCoders\OpenPayroll\Models\Earning\Earning::class, function (Faker $faker) {
     return [
         'name'            => $faker->sentence,
         'description'     => $faker->sentence,
