@@ -13,6 +13,10 @@
         "psr-4": {
             "CleaniqueCoders\\OpenPayroll\\": "src/"
         },
+        "classmap": [
+            "database/seeds",
+            "database/factories"
+        ],
         "files": [
             "src/Support/helpers.php"
         ]
