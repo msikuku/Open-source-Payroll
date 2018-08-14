@@ -1,6 +1,5 @@
 <?php
 
-use CleaniqueCoders\OpenPayroll\Models\Payroll\Type\Earning as EarningType;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -19,10 +18,10 @@ class PayrollSeeder extends Seeder
 
     private function seedPayrollStatuses()
     {
-        $data = config('payroll.seeds.payroll_statuses');
+        $data = config('open-payroll.seeds.payroll_statuses');
 
         foreach ($data as $datum) {
-            DeductionType::create([
+            config('open-payroll.models.payroll_statuses')::create([
                 'name'      => $datum,
                 'code'      => Str::kebab($datum),
                 'is_locked' => true,
@@ -32,10 +31,10 @@ class PayrollSeeder extends Seeder
 
     private function seedPayslipStatuses()
     {
-        $data = config('payroll.seeds.payslip_statuses');
+        $data = config('open-payroll.seeds.payslip_statuses');
 
         foreach ($data as $datum) {
-            DeductionType::create([
+            config('open-payroll.models.payslip_statuses')::create([
                 'name'      => $datum,
                 'code'      => Str::kebab($datum),
                 'is_locked' => true,
@@ -45,10 +44,10 @@ class PayrollSeeder extends Seeder
 
     private function seedDeductionTypes()
     {
-        $data = config('payroll.seeds.deduction_types');
+        $data = config('open-payroll.seeds.deduction_types');
 
         foreach ($data as $datum) {
-            DeductionType::create([
+            config('open-payroll.models.deduction_types')::create([
                 'name'      => $datum,
                 'code'      => Str::kebab($datum),
                 'is_locked' => true,
@@ -58,10 +57,10 @@ class PayrollSeeder extends Seeder
 
     private function seedEarningTypes()
     {
-        $data = config('payroll.seeds.earning_types');
+        $data = config('open-payroll.seeds.earning_types');
 
         foreach ($data as $datum) {
-            EarningType::create([
+            config('open-payroll.models.earning_types')::create([
                 'name'      => $datum,
                 'code'      => Str::kebab($datum),
                 'is_locked' => true,

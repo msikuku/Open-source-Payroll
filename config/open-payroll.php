@@ -4,8 +4,8 @@
 return [
     'seeds' => [
         'deduction_types' => [
-        'Loan',
-        'Income Tax',
+            'Loan',
+            'Income Tax',
         ],
         'earning_types' => [
             'Basic',
@@ -22,15 +22,15 @@ return [
         ],
     ],
     'models' => [
-        'user'            => \App\User::class,
-        'payroll'         => \CleaniqueCoders\OpenPayroll\Models\Payroll\Payroll::class,
-        'payroll_status'  => \CleaniqueCoders\OpenPayroll\Models\Payroll\Status::class,
-        'payslip'         => \CleaniqueCoders\OpenPayroll\Models\Payslip\Payslip::class,
-        'payslip_status'  => \CleaniqueCoders\OpenPayroll\Models\Payslip\Status::class,
-        'deduction'       => \CleaniqueCoders\OpenPayroll\Models\Deduction\Deduction::class,
-        'deduction_types' => \CleaniqueCoders\OpenPayroll\Models\Deduction\Type::class,
-        'earning'         => \CleaniqueCoders\OpenPayroll\Models\Earning\Earning::class,
-        'earning_types'   => \CleaniqueCoders\OpenPayroll\Models\Earning\Type::class,
+        'user'             => \App\User::class,
+        'payroll'          => \CleaniqueCoders\OpenPayroll\Models\Payroll\Payroll::class,
+        'payroll_statuses' => \CleaniqueCoders\OpenPayroll\Models\Payroll\Status::class,
+        'payslip'          => \CleaniqueCoders\OpenPayroll\Models\Payslip\Payslip::class,
+        'payslip_statuses' => \CleaniqueCoders\OpenPayroll\Models\Payslip\Status::class,
+        'deduction'        => \CleaniqueCoders\OpenPayroll\Models\Deduction\Deduction::class,
+        'deduction_types'  => \CleaniqueCoders\OpenPayroll\Models\Deduction\Type::class,
+        'earning'          => \CleaniqueCoders\OpenPayroll\Models\Earning\Earning::class,
+        'earning_types'    => \CleaniqueCoders\OpenPayroll\Models\Earning\Type::class,
     ],
     'tables' => [
         'names' => [
