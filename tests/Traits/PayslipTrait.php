@@ -8,6 +8,11 @@ trait PayslipTrait
 {
     public $payslip;
 
+    public function getAPayslip()
+    {
+        return $this->payslip = Payslip::with('payroll')->first();
+    }
+
     public function seedOnePayslipData()
     {
         $this->user = $user = \DB::table('users')->first();
