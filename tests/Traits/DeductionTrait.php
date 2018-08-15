@@ -13,7 +13,7 @@ trait DeductionTrait
 
     public function getAllDeductionTypes()
     {
-    	return $this->deduction_types = DeductionType::all();
+        return $this->deduction_types = DeductionType::all();
     }
 
     /** @test */
@@ -39,34 +39,33 @@ trait DeductionTrait
     /** @test */
     public function it_can_insert_deduction_data()
     {
-    	$deduction_types = $this->getAllDeductionTypes();
+        $deduction_types = $this->getAllDeductionTypes();
 
-    	$payslip = $this->getAPayslip();
-    	$payroll = $payslip->payroll;
-    	
-    	foreach ($deduction_types as $type) {
-    		$this->seedDatum([
-    			'user_id' => $payslip->user_id,
-    			'payroll_id' => $payslip->payroll_id,
-    			'payslip_id' => $payslip->id,
-    			'deduction_type_id' => $type->id,
-    			'name' => $type->name,
-    			'description' => 'Deduction for ' . $type->name . ' - ' . $payroll->month . '/' . $payroll->year,
-    			'amount' => 10000,
-    		], \CleaniqueCoders\OpenPayroll\Models\Deduction\Deduction::class);
-    	}
+        $payslip = $this->getAPayslip();
+        $payroll = $payslip->payroll;
 
-    	foreach ($deduction_types as $type) {
-    		$this->assertDatabaseHas('deductions', [
-    			'user_id' => $payslip->user_id,
-    			'payroll_id' => $payslip->payroll_id,
-    			'payslip_id' => $payslip->id,
-    			'deduction_type_id' => $type->id,
-    			'name' => $type->name,
-    			'description' => 'Deduction for ' . $type->name . ' - ' . $payroll->month . '/' . $payroll->year,
-    			'amount' => 10000,
-    		]);
-    	}
+        foreach ($deduction_types as $type) {
+            $this->seedDatum([
+                'user_id'           => $payslip->user_id,
+                'payroll_id'        => $payslip->payroll_id,
+                'payslip_id'        => $payslip->id,
+                'deduction_type_id' => $type->id,
+                'name'              => $type->name,
+                'description'       => 'Deduction for ' . $type->name . ' - ' . $payroll->month . '/' . $payroll->year,
+                'amount'            => 10000,
+            ], \CleaniqueCoders\OpenPayroll\Models\Deduction\Deduction::class);
+        }
+
+        foreach ($deduction_types as $type) {
+            $this->assertDatabaseHas('deductions', [
+                'user_id'           => $payslip->user_id,
+                'payroll_id'        => $payslip->payroll_id,
+                'payslip_id'        => $payslip->id,
+                'deduction_type_id' => $type->id,
+                'name'              => $type->name,
+                'description'       => 'Deduction for ' . $type->name . ' - ' . $payroll->month . '/' . $payroll->year,
+                'amount'            => 10000,
+            ]);
+        }
     }
-
 }

@@ -13,7 +13,7 @@ trait EarningTrait
 
     public function getAllEarningTypes()
     {
-    	return $this->earning_types = EarningType::all();
+        return $this->earning_types = EarningType::all();
     }
 
     /** @test */
@@ -39,34 +39,33 @@ trait EarningTrait
     /** @test */
     public function it_can_insert_earning_data()
     {
-    	$earning_types = $this->getAllEarningTypes();
+        $earning_types = $this->getAllEarningTypes();
 
-    	$payslip = $this->getAPayslip();
-    	$payroll = $payslip->payroll;
-    	
-    	foreach ($earning_types as $type) {
-    		$this->seedDatum([
-    			'user_id' => $payslip->user_id,
-    			'payroll_id' => $payslip->payroll_id,
-    			'payslip_id' => $payslip->id,
-    			'earning_type_id' => $type->id,
-    			'name' => $type->name,
-    			'description' => 'Earning for ' . $type->name . ' - ' . $payroll->month . '/' . $payroll->year,
-    			'amount' => 10000,
-    		], \CleaniqueCoders\OpenPayroll\Models\Earning\Earning::class);
-    	}
+        $payslip = $this->getAPayslip();
+        $payroll = $payslip->payroll;
 
-    	foreach ($earning_types as $type) {
-    		$this->assertDatabaseHas('earnings', [
-    			'user_id' => $payslip->user_id,
-    			'payroll_id' => $payslip->payroll_id,
-    			'payslip_id' => $payslip->id,
-    			'earning_type_id' => $type->id,
-    			'name' => $type->name,
-    			'description' => 'Earning for ' . $type->name . ' - ' . $payroll->month . '/' . $payroll->year,
-    			'amount' => 10000,
-    		]);
-    	}
+        foreach ($earning_types as $type) {
+            $this->seedDatum([
+                'user_id'         => $payslip->user_id,
+                'payroll_id'      => $payslip->payroll_id,
+                'payslip_id'      => $payslip->id,
+                'earning_type_id' => $type->id,
+                'name'            => $type->name,
+                'description'     => 'Earning for ' . $type->name . ' - ' . $payroll->month . '/' . $payroll->year,
+                'amount'          => 10000,
+            ], \CleaniqueCoders\OpenPayroll\Models\Earning\Earning::class);
+        }
+
+        foreach ($earning_types as $type) {
+            $this->assertDatabaseHas('earnings', [
+                'user_id'         => $payslip->user_id,
+                'payroll_id'      => $payslip->payroll_id,
+                'payslip_id'      => $payslip->id,
+                'earning_type_id' => $type->id,
+                'name'            => $type->name,
+                'description'     => 'Earning for ' . $type->name . ' - ' . $payroll->month . '/' . $payroll->year,
+                'amount'          => 10000,
+            ]);
+        }
     }
-
 }
