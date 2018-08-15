@@ -1,11 +1,12 @@
-<?php 
+<?php
 
 namespace CleaniqueCoders\OpenPayroll\Tests\Traits;
 
-trait TestCaseTrait {
+trait TestCaseTrait
+{
     use SeedTrait;
-	
-	/**
+
+    /**
      * Setup the test environment.
      */
     public function setUp()
@@ -93,7 +94,8 @@ trait TestCaseTrait {
 
     /**
      * Remove file if exists.
-     * @param  string $path 
+     *
+     * @param string $path
      */
     public function removeIfExist($path)
     {
