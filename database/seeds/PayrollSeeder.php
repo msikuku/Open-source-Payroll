@@ -1,5 +1,9 @@
 <?php
 
+use CleaniqueCoders\OpenPayroll\Models\Payroll\Status as PayrollStatus;
+use CleaniqueCoders\OpenPayroll\Models\Payslip\Status as PayslipStatus;
+use CleaniqueCoders\OpenPayroll\Models\Deduction\Type as DeductionType;
+use CleaniqueCoders\OpenPayroll\Models\Earning\Type as EarningType;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -21,7 +25,7 @@ class PayrollSeeder extends Seeder
         $data = config('open-payroll.seeds.payroll_statuses');
 
         foreach ($data as $datum) {
-            config('open-payroll.models.payroll_statuses')::create([
+            PayrollStatus::create([
                 'name'      => $datum,
                 'code'      => Str::kebab($datum),
                 'is_locked' => true,
@@ -34,7 +38,7 @@ class PayrollSeeder extends Seeder
         $data = config('open-payroll.seeds.payslip_statuses');
 
         foreach ($data as $datum) {
-            config('open-payroll.models.payslip_statuses')::create([
+            PayslipStatus::create([
                 'name'      => $datum,
                 'code'      => Str::kebab($datum),
                 'is_locked' => true,
@@ -47,7 +51,7 @@ class PayrollSeeder extends Seeder
         $data = config('open-payroll.seeds.deduction_types');
 
         foreach ($data as $datum) {
-            config('open-payroll.models.deduction_types')::create([
+            DeductionType::create([
                 'name'      => $datum,
                 'code'      => Str::kebab($datum),
                 'is_locked' => true,
@@ -60,7 +64,7 @@ class PayrollSeeder extends Seeder
         $data = config('open-payroll.seeds.earning_types');
 
         foreach ($data as $datum) {
-            config('open-payroll.models.earning_types')::create([
+            EarningType::create([
                 'name'      => $datum,
                 'code'      => Str::kebab($datum),
                 'is_locked' => true,
