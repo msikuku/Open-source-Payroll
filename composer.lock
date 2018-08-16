@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "cleaniquecoders/blueprint-macro",
-            "version": "v2.0.6",
+            "version": "v2.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cleaniquecoders/blueprint-macro.git",
-                "reference": "3bcce25b1699433862565c8c594bd4c1bd315086"
+                "reference": "31e03be1fae599a30ebb50bbaf336576dc1acc89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cleaniquecoders/blueprint-macro/zipball/3bcce25b1699433862565c8c594bd4c1bd315086",
-                "reference": "3bcce25b1699433862565c8c594bd4c1bd315086",
+                "url": "https://api.github.com/repos/cleaniquecoders/blueprint-macro/zipball/31e03be1fae599a30ebb50bbaf336576dc1acc89",
+                "reference": "31e03be1fae599a30ebb50bbaf336576dc1acc89",
                 "shasum": ""
             },
             "require": {
@@ -28,7 +28,6 @@
                 "php": ">=7.1"
             },
             "require-dev": {
-                "codedungeon/phpunit-result-printer": "^0.4.4|^0.6.0",
                 "orchestra/testbench": "3.5.*|3.6.*",
                 "phpunit/phpunit": "^6.5|^7.0"
             },
@@ -56,7 +55,7 @@
                 }
             ],
             "description": "Laravel Blueprint Macro",
-            "time": "2018-08-06T14:57:55+00:00"
+            "time": "2018-08-16T04:46:15+00:00"
         },
         {
             "name": "cleaniquecoders/laravel-helper",
