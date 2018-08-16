@@ -3,12 +3,12 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(\CleaniqueCoders\OpenPayroll\Models\Payroll\Payroll::class, function (Faker $faker) {
+$factory->define(\CleaniqueCoders\OpenPayroll\Models\Payroll\Payroll::class, function(Faker $faker) {
     return [
     ];
 });
 
-$factory->define(\CleaniqueCoders\OpenPayroll\Models\Payslip\Payslip::class, function (Faker $faker) {
+$factory->define(\CleaniqueCoders\OpenPayroll\Models\Payslip\Payslip::class, function(Faker $faker) {
     return [
         'total_earning'   => 0,
         'total_deduction' => 0,
@@ -18,7 +18,7 @@ $factory->define(\CleaniqueCoders\OpenPayroll\Models\Payslip\Payslip::class, fun
     ];
 });
 
-$factory->define(\CleaniqueCoders\OpenPayroll\Models\Deduction\Deduction::class, function (Faker $faker) {
+$factory->define(\CleaniqueCoders\OpenPayroll\Models\Deduction\Deduction::class, function(Faker $faker) {
     return [
         'name'              => $faker->sentence,
         'description'       => $faker->sentence,
@@ -27,7 +27,7 @@ $factory->define(\CleaniqueCoders\OpenPayroll\Models\Deduction\Deduction::class,
     ];
 });
 
-$factory->define(\CleaniqueCoders\OpenPayroll\Models\Earning\Earning::class, function (Faker $faker) {
+$factory->define(\CleaniqueCoders\OpenPayroll\Models\Earning\Earning::class, function(Faker $faker) {
     return [
         'name'            => $faker->sentence,
         'description'     => $faker->sentence,

@@ -1,9 +1,9 @@
 <?php
 
-use CleaniqueCoders\OpenPayroll\Models\Payroll\Status as PayrollStatus;
-use CleaniqueCoders\OpenPayroll\Models\Payslip\Status as PayslipStatus;
 use CleaniqueCoders\OpenPayroll\Models\Deduction\Type as DeductionType;
 use CleaniqueCoders\OpenPayroll\Models\Earning\Type as EarningType;
+use CleaniqueCoders\OpenPayroll\Models\Payroll\Status as PayrollStatus;
+use CleaniqueCoders\OpenPayroll\Models\Payslip\Status as PayslipStatus;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 

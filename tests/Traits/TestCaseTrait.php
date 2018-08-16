@@ -75,7 +75,7 @@ trait TestCaseTrait
     {
         if (class_exists('CreatePayrollTable')) {
             collect(glob(database_path('migrations/*.php')))
-                ->each(function ($path) {
+                ->each(function($path) {
                     $this->removeIfExist($path);
                 });
         }
@@ -88,7 +88,7 @@ trait TestCaseTrait
     {
         if (class_exists('PayrollTestSeeder') || class_exists('PayrollSeeder')) {
             collect(glob(database_path('seeds/*.php')))
-                ->each(function ($path) {
+                ->each(function($path) {
                     $this->removeIfExist($path);
                 });
         }
@@ -157,7 +157,7 @@ trait TestCaseTrait
      */
     protected function assertTableHasColumns($table, $columns)
     {
-        collect($columns)->each(function ($column) use ($table) {
+        collect($columns)->each(function($column) use ($table) {
             $this->assertTrue(Schema::hasColumn($table, $column));
         });
     }
