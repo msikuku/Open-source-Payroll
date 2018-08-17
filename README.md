@@ -5,9 +5,25 @@
 
 [![Build Status](https://travis-ci.org/cleaniquecoders/open-payroll.svg?branch=master)](https://travis-ci.org/cleaniquecoders/open-payroll) [![Latest Stable Version](https://poser.pugx.org/cleaniquecoders/open-payroll/v/stable)](https://packagist.org/packages/cleaniquecoders/open-payroll) [![Total Downloads](https://poser.pugx.org/cleaniquecoders/open-payroll/downloads)](https://packagist.org/packages/cleaniquecoders/open-payroll) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/cleaniquecoders/open-payroll/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/cleaniquecoders/open-payroll/?branch=master) [![License](https://poser.pugx.org/cleaniquecoders/open-payroll/license)](https://packagist.org/packages/cleaniquecoders/open-payroll)
 
-## About Your Package
+## About Open Payroll
 
-> Stay tuned!
+Open Payroll is an Open Source Initiative for Payroll System - which means you can grab the code to be use in your exisitng Laravel application.
+
+Following are the features provided:
+
+- Multiple Earning and Deductions, based on organisation or employee
+- Automated Payroll Calculation using Payroll Scheduler
+- Each payroll will require at least a reviewer and an approver 
+- Customisable Payslip Design
+- E-mail / Export the payslip to the employee
+- Payroll Report for Administrator
+- Payroll Report for Employee
+- Custom Earnings and Deductions 
+- Customasible earnings and deductions calculation process
+
+## Demo Site
+
+Youn can checkout the demo [here](https://open-payroll.cleaniquecoders.com/).
 
 ## Installation
 
