@@ -3,7 +3,7 @@
     <img width="300px" src="resources/img/OpenPayroll.png" alt="OpenPayroll"/>
 </p>
 
-[![Build Status](https://travis-ci.org/cleaniquecoders/open-payroll.svg?branch=master)](https://travis-ci.org/cleaniquecoders/open-payroll) [![Latest Stable Version](https://poser.pugx.org/cleaniquecoders/open-payroll/v/stable)](https://packagist.org/packages/cleaniquecoders/open-payroll) [![Total Downloads](https://poser.pugx.org/cleaniquecoders/open-payroll/downloads)](https://packagist.org/packages/cleaniquecoders/open-payroll) [![License](https://poser.pugx.org/cleaniquecoders/open-payroll/license)](https://packagist.org/packages/cleaniquecoders/open-payroll)
+[![Build Status](https://travis-ci.org/cleaniquecoders/open-payroll.svg?branch=master)](https://travis-ci.org/cleaniquecoders/open-payroll) [![Latest Stable Version](https://poser.pugx.org/cleaniquecoders/open-payroll/v/stable)](https://packagist.org/packages/cleaniquecoders/open-payroll) [![Total Downloads](https://poser.pugx.org/cleaniquecoders/open-payroll/downloads)](https://packagist.org/packages/cleaniquecoders/open-payroll) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/cleaniquecoders/open-payroll/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/cleaniquecoders/open-payroll/?branch=master) [![License](https://poser.pugx.org/cleaniquecoders/open-payroll/license)](https://packagist.org/packages/cleaniquecoders/open-payroll)
 
 ## About Your Package
 
