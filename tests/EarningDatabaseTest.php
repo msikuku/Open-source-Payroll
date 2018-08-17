@@ -2,8 +2,8 @@
 
 namespace CleaniqueCoders\OpenPayroll\Tests;
 
-use Illuminate\Support\Str;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Str;
 
 class EarningDatabaseTest extends TestCase
 {

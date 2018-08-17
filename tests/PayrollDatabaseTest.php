@@ -3,7 +3,6 @@
 namespace CleaniqueCoders\OpenPayroll\Tests;
 
 use CleaniqueCoders\OpenPayroll\Tests\Traits\PayrollTrait;
-use CleaniqueCoders\OpenPayroll\Tests\Traits\UserTrait;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 

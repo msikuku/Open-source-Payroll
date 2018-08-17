@@ -2,9 +2,7 @@
 
 namespace CleaniqueCoders\OpenPayroll\Tests\Traits;
 
-use CleaniqueCoders\OpenPayroll\Models\Earning\Earning;
 use CleaniqueCoders\OpenPayroll\Models\Earning\Type as EarningType;
-use Illuminate\Support\Str;
 
 trait EarningTrait
 {
