@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PayslipDatabaseTest extends TestCase
 {
-    use PayrollTrait, PayslipTrait, RefreshDatabase, UserTrait;
+    use PayrollTrait, RefreshDatabase, UserTrait;
 
     public function setUp()
     {

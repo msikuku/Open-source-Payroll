@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class EarningDatabaseTest extends TestCase
 {
-    use EarningTrait, PayrollTrait, PayslipTrait, RefreshDatabase, UserTrait;
+    use PayrollTrait, RefreshDatabase, UserTrait;
 
     public function setUp()
     {

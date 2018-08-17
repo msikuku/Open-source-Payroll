@@ -6,6 +6,8 @@ use CleaniqueCoders\OpenPayroll\Models\Payslip\Payslip;
 
 trait PayslipTrait
 {
+    use EarningTrait, DeductionTrait;
+
     public $payslip;
 
     public function getAPayslip()

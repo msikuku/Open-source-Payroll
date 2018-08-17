@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DeductionDatabaseTest extends TestCase
 {
-    use DeductionTrait, PayrollTrait, PayslipTrait, RefreshDatabase, UserTrait;
+    use PayrollTrait, RefreshDatabase, UserTrait;
 
     public function setUp()
     {
