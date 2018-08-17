@@ -17,7 +17,7 @@ trait PayslipTrait
 
     public function seedOnePayslipData()
     {
-        $this->user = $user = \DB::table('users')->first();
+        $this->user = $this->getAUser();
         $datum      = [
             'user_id'         => $this->user->id,
             'payroll_id'      => $this->payroll->id,
@@ -41,12 +41,5 @@ trait PayslipTrait
             'gross_salary'    => 900000,
             'net_salary'      => 900000,
         ]);
-    }
-
-    /** @test */
-    public function it_can_insert_payslip_data()
-    {
-        $this->seedOnePayslipData();
-        $this->assertHasOnePayslipData();
     }
 }

@@ -6,7 +6,7 @@ use CleaniqueCoders\OpenPayroll\Models\Payroll\Payroll;
 
 trait PayrollTrait
 {
-    use PayslipTrait;
+    use PayslipTrait, UserTrait;
 
     public $payroll;
 

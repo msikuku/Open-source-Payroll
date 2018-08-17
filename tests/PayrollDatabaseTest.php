@@ -9,13 +9,14 @@ use Illuminate\Support\Str;
 
 class PayrollDatabaseTest extends TestCase
 {
-    use PayrollTrait, RefreshDatabase, UserTrait;
+    use PayrollTrait, RefreshDatabase;
 
     public function setUp()
     {
         parent::setUp();
         $this->seedPayrollSeeder();
         $this->reseedUsers();
+        $this->seedOnePayrollData();
     }
 
     /** @test */
