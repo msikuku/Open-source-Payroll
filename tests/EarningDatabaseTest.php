@@ -2,9 +2,7 @@
 
 namespace CleaniqueCoders\OpenPayroll\Tests;
 
-use CleaniqueCoders\OpenPayroll\Tests\Traits\EarningTrait;
 use CleaniqueCoders\OpenPayroll\Tests\Traits\PayrollTrait;
-use CleaniqueCoders\OpenPayroll\Tests\Traits\PayslipTrait;
 use CleaniqueCoders\OpenPayroll\Tests\Traits\UserTrait;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 

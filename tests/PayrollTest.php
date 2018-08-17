@@ -2,53 +2,32 @@
 
 namespace CleaniqueCoders\OpenPayroll\Tests;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
 class PayrollTest extends TestCase
 {
-    /** @test */
-    public function it_has_config_file()
-    {
-        $this->assertHasConfig('open-payroll');
-    }
+    use RefreshDatabase, Traits\PayrollTrait;
 
-    /** @test */
-    public function it_has_helper()
+    public function setUp()
     {
-        $this->assertHasHelper('payroll');
-    }
+        parent::setUp();
 
-    /** @test */
-    public function it_has_payroll_processor()
-    {
-        $this->assertHasClass(\CleaniqueCoders\OpenPayroll\Processors\PayrollProcessor::class);
-    }
+        $this->artisan('vendor:publish', [
+            '--force' => true,
+            '--tag'   => 'open-payroll-config',
+        ]);
 
-    /** @test */
-    public function it_has_users_table()
-    {
-        $this->assertHasTable('users');
-    }
+        $this->artisan('vendor:publish', [
+            '--force' => true,
+            '--tag'   => 'open-payroll-migrations',
+        ]);
 
-    /** @test */
-    public function it_has_model()
-    {
-        $this->assertHasClass(\CleaniqueCoders\OpenPayroll\Models\Payroll\Payroll::class);
-        $this->assertHasClass(\CleaniqueCoders\OpenPayroll\Models\Payroll\Status::class);
-        $this->assertHasClass(\CleaniqueCoders\OpenPayroll\Models\Payslip\Payslip::class);
-        $this->assertHasClass(\CleaniqueCoders\OpenPayroll\Models\Payslip\Status::class);
-        $this->assertHasClass(\CleaniqueCoders\OpenPayroll\Models\Deduction\Deduction::class);
-        $this->assertHasClass(\CleaniqueCoders\OpenPayroll\Models\Deduction\Type::class);
-        $this->assertHasClass(\CleaniqueCoders\OpenPayroll\Models\Earning\Earning::class);
-        $this->assertHasClass(\CleaniqueCoders\OpenPayroll\Models\Earning\Type::class);
-    }
+        $this->artisan('vendor:publish', [
+            '--force' => true,
+            '--tag'   => 'open-payroll-seeders',
+        ]);
 
-    /** @test */
-    public function it_has_openpayroll_tables()
-    {
-        $this->assertHasMigration('CreatePayrollTable');
-
-        $tables = config('open-payroll.tables.names');
-        foreach ($tables as $table) {
-            $this->assertHasTable($table);
-        }
+        $this->loadLaravelMigrations(['--database' => 'testbench']);
+        $this->artisan('migrate', ['--database' => 'testbench']);
     }
 }

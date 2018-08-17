@@ -2,13 +2,37 @@
 
 namespace CleaniqueCoders\OpenPayroll\Tests;
 
-use CleaniqueCoders\OpenPayroll\Tests\Traits\TestCaseTrait;
+use CleaniqueCoders\OpenPayroll\Traits\ReferenceTrait;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Schema;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
-    use Traits\SeedTrait;
-    
+    use Traits\SeedTrait, ReferenceTrait, RefreshDatabase;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->artisan('vendor:publish', [
+            '--force' => true,
+            '--tag'   => 'open-payroll-config',
+        ]);
+
+        $this->artisan('vendor:publish', [
+            '--force' => true,
+            '--tag'   => 'open-payroll-migrations',
+        ]);
+
+        $this->artisan('vendor:publish', [
+            '--force' => true,
+            '--tag'   => 'open-payroll-seeders',
+        ]);
+
+        $this->loadLaravelMigrations(['--database' => 'testbench']);
+        $this->artisan('migrate', ['--database' => 'testbench']);
+    }
+
     public function tearDown()
     {
         $this->removeIfExist(config_path('open-payroll.php'));
@@ -21,7 +45,27 @@ class TestCase extends \Orchestra\Testbench\TestCase
             });
         parent::tearDown();
     }
-    
+
+    /**
+     * Truncate table.
+     */
+    public function truncateTable($table)
+    {
+        \DB::table($table)->truncate();
+    }
+
+    /**
+     * Remove file if exists.
+     *
+     * @param string $path
+     */
+    public function removeIfExist($path)
+    {
+        if (file_exists($path)) {
+            unlink($path);
+        }
+    }
+
     /**
      * Load Package Service Provider.
      *
@@ -53,26 +97,6 @@ class TestCase extends \Orchestra\Testbench\TestCase
             'database' => ':memory:',
             'prefix'   => '',
         ]);
-    }
-
-    /**
-     * Truncate table.
-     */
-    public function truncateTable($table)
-    {
-        \DB::table($table)->truncate();
-    }
-
-    /**
-     * Remove file if exists.
-     *
-     * @param string $path
-     */
-    public function removeIfExist($path)
-    {
-        if (file_exists($path)) {
-            unlink($path);
-        }
     }
 
     /**
@@ -116,6 +140,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected function assertHasConfig($config)
     {
         $this->assertFileExists(config_path($config . '.php'));
+        $this->assertNotNull(config($config));
     }
 
     /**

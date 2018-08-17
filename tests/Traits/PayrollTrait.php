@@ -7,7 +7,7 @@ use CleaniqueCoders\OpenPayroll\Models\Payroll\Payroll;
 trait PayrollTrait
 {
     use PayslipTrait;
-    
+
     public $payroll;
 
     public function seedPayrollSeeder()
