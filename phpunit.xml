@@ -13,6 +13,9 @@
         <testsuite name="Package">
             <directory suffix="Test.php">./tests/</directory>
         </testsuite>
+        <testsuite name="Database">
+            <directory suffix="Test.php">./tests/Database/</directory>
+        </testsuite>
     </testsuites>
     <filter>
         <whitelist addUncoveredFilesFromWhitelist="false">
