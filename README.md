@@ -7,7 +7,7 @@
 
 ## About Open Payroll
 
-Open Payroll is an Open Source Initiative for Payroll System - which means you can grab the code to be use in your exisitng Laravel application.
+[Open Payroll](https://cleaniquecoders.github.io/open-payroll/) is an Open Source Initiative for Payroll System - which means you can grab the code to be use in your exisitng Laravel application.
 
 Following are the features provided:
 
