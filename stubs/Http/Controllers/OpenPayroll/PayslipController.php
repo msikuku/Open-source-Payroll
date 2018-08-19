@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Payroll;
+namespace App\Http\Controllers\OpenPayroll;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

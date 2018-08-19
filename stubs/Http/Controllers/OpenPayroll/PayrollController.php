@@ -1,12 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Payroll;
+namespace App\Http\Controllers\OpenPayroll;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class DeductionController extends Controller
+class PayrollController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,8 @@ class DeductionController extends Controller
      */
     public function index()
     {
-        //
+        $payrolls = \App\Models\OpenPayroll\Payroll::latest()->paginate();
+        return view('payroll.index', compact('payrolls'));
     }
 
     /**
@@ -24,8 +30,7 @@ class DeductionController extends Controller
      */
     public function create()
     {
-        $types = \App\Models\OpenPayroll\DeductionType::all();
-        return view('deductions.create', compact('types'));
+        return view('payroll.create');
     }
 
     /**
@@ -37,26 +42,16 @@ class DeductionController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'payslip' => 'required',
-            'type' => 'required',
-            'amount' => 'required',
+            'month' => 'required|min:1|max:12',
+            'year' => 'required',
+            'date' => 'required'
         ]);
 
-        $payslip = \App\Models\OpenPayroll\Payslip::with('payroll', 'user')->findByHashslugOrId($request->payslip);
-        $type = \App\Models\OpenPayroll\DeductionType::find($request->type);
+        $payroll = \App\Models\OpenPayroll\Payroll::create($request->only('user_id', 'month', 'year', 'date'));
 
-        $payslip->deductions()->create([
-            'user_id' => $payslip->user_id,
-            'payroll_id' => $payslip->payroll_id,
-            'deduction_type_id' => $request->type,
-            'name' => $type->name,
-            'description' => $type->name,
-            'amount' => money()->toMachine($request->amount),
-        ]);
+        swal()->success('Payroll', 'You have successfully created a payroll.');
 
-        swal()->success('Deduction', 'You have successfully added new earning.');
-
-        return redirect()->route('payslip.show', $request->payslip);
+        return redirect()->route('payroll.show', $payroll->hashslug);
     }
 
     /**
@@ -67,7 +62,8 @@ class DeductionController extends Controller
      */
     public function show($id)
     {
-        //
+        $payroll = \App\Models\OpenPayroll\Payroll::with('payslips', 'payslips.user')->findByHashslugOrId($id);
+        return view('payroll.show', compact('payroll'));
     }
 
     /**
@@ -101,10 +97,15 @@ class DeductionController extends Controller
      */
     public function destroy($id)
     {
-        \App\Models\OpenPayroll\Deduction::hashslug($id)->delete();
+        $payroll = \App\Models\OpenPayroll\Payroll::whereHashslug($id)->firstOrFail();        
 
-        swal()->success('Deduction', 'You have successfully delete an earning.');
+        if($payroll->is_locked) {
+            swal()->error('Payroll', 'You cannot delete locked payroll.');
+            return redirect()->route('payroll.index');
+        }
 
-        return back();
+        $payroll->delete();
+        swal()->success('Payroll', 'You have successfully delete a payroll');
+        return redirect()->route('payroll.index');
     }
 }
