@@ -2,26 +2,105 @@
 
 use Illuminate\Database\Seeder;
 
-class PayrollTestSeeder extends Seeder
+class DemoSeeder extends Seeder
 {
+    public $faker;
+
     /**
      * Run the database seeds.
+     *
+     * @return void
      */
     public function run()
     {
-        $this->users = config('open-payroll.models.user')::all();
-        $this->createPayrollForAYear();
+        $this->faker = \Faker\Factory::create();
+        $this->seedEmployees();
+        $this->seedPayroll();
+        $this->calculatePayroll();
     }
 
-    private function createPayrollForAYear()
+    private function seedEmployees()
     {
-        for ($i = 1; $i <= 12; ++$i) {
-            factory(config('open-payroll.models.payroll'))->create([
-                'user_id' => $this->users->shuffle()->id,
-                'month'   => $i,
-                'year'    => date('Y'),
-                'date'    => date('Y-m-') . '27',
+        $this->command->info('Seeding employees...');
+        factory(\App\Models\OpenPayroll\Employee::class, 3)->create()->each(function($user){
+            $user->addresses()->create([
+                'primary' => $this->faker->address,
+                'postcode' => $this->faker->postcode,
+                'city' => $this->faker->city,
+                'state' => $this->faker->state,
+                'country_id' => $this->faker->randomElement(range(1, 100)),
+                'is_default' => true,
+            ]);
+
+            $user->phones()->create([
+                'phone_type_id' => $this->faker->randomElement([1,2]),
+                'phone_number' => $this->faker->phoneNumber,
+                'is_default' => true,
+            ]);
+
+            $user->banks()->create([
+                'bank_id' => $this->faker->randomElement(range(1, 50)),
+                'account_no' => $this->faker->bankAccountNumber,
+            ]);
+
+            $user->position()->create([
+                'name' => $this->faker->jobTitle,
+            ]);
+
+            $user->salary()->create([
+                'amount' => $this->faker->randomElement(range(10000, 20000)) * 100,
+            ]);
+        });
+    }
+
+    private function seedPayroll()
+    {
+        $this->command->info('Seeding payroll...');
+        $admin = \App\Models\OpenPayroll\Admin::create([
+            'name' => 'OpenPayroll Admin',
+            'email' => 'admin@openpayroll.com',
+            'password' => bcrypt('password')
+        ]);
+
+        for ($month = 1; $month <= 12; $month++) { 
+            $admin->payrolls()->create([
+                'month' => now()->addMonths($month)->format('n'),
+                'year' => now()->addMonths($month)->format('Y'),
+                'date' => now()->addMonths($month)->format('Y-m-d')
             ]);
         }
+    }
+
+    private function calculatePayroll()
+    {
+        $payrolls = \App\Models\OpenPayroll\Payroll::all();
+
+        \App\Models\OpenPayroll\Employee::with('salary')->get()->each(function($employee) use ($payrolls) {
+            $payrolls->each(function($payroll) use ($employee) {
+                $payroll->payslips()->create([
+                    'user_id' => $employee->id,
+                    'payroll_id' => $payroll->id,
+                    'basic_salary' => optional($employee->salary)->amount ?? 0,
+                    'gross_salary' => optional($employee->salary)->amount ?? 0,
+                    'net_salary' => optional($employee->salary)->amount ?? 0,
+                ]);
+
+                $payslip = $payroll->payslips()->first();
+                
+                // earnings
+                config('open-payroll.models.earning')::create([
+                    'user_id' => $employee->id,
+                    'payroll_id' => $payroll->id,
+                    'payslip_id' => $payslip->id,
+                    'earning_type_id' => 1,
+                    'name' => 'Basic Salary',
+                    'description' => 'Basic Salary',
+                    'amount' => optional($employee->salary)->amount ?? 0,
+                ]);
+                
+                // deduction
+                // @todo
+            });
+        });
     }
 }
