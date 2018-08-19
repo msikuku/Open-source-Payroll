@@ -30,17 +30,10 @@ class OpenPayrollServiceProvider extends ServiceProvider
         /*
          * Seeders
          */
-        if (! class_exists('PayrollSeeder')) {
-            $this->publishes([
-                __DIR__ . '/../database/seeds/PayrollSeeder.php' => database_path('seeds/PayrollSeeder.php'),
-            ], 'seeders');
-        }
-
-        if (! class_exists('PayrollTestSeeder')) {
-            $this->publishes([
-                __DIR__ . '/../database/seeds/PayrollTestSeeder.php' => database_path('seeds/PayrollTestSeeder.php'),
-            ], 'seeders');
-        }
+        $this->publishes([
+            __DIR__ . '/../database/seeds/PayrollSeeder.php'     => database_path('seeds/PayrollSeeder.php'),
+            __DIR__ . '/../database/seeds/PayrollTestSeeder.php' => database_path('seeds/PayrollTestSeeder.php'),
+        ], 'seeders');
 
         /*
          * Views
@@ -60,10 +53,10 @@ class OpenPayrollServiceProvider extends ServiceProvider
          * Controllers
          */
         $this->publishes([
-            __DIR__ . '/../stubs/Http/Controllers/OpenPayroll' => app_path('Http/Controllers'),
+            __DIR__ . '/../stubs/Http/Controllers' => app_path('Http/Controllers'),
         ], 'controllers');
 
-        /**
+        /*
          * Commands
          */
         if ($this->app->runningInConsole()) {

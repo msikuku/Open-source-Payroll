@@ -22,8 +22,6 @@ class InstallCommand extends Command
 
     /**
      * Create a new command instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -39,10 +37,13 @@ class InstallCommand extends Command
     {
         $this->call('vendor:publish', [
             '--provider' => 'CleaniqueCoders\OpenPayroll\OpenPayrollServiceProvider',
-            '--tag' => 'config migrations seeders',
-            '--force' => true,
-            '--no-interaction' => true,
-            '--quiet' => true,
+            '--force'    => true,
         ]);
+
+        $route = file_get_contents(__DIR__ . '/stubs/routes/web.php.stub');
+        $file  = base_path('routes/web.php');
+        file_put_contents($file, $route, FILE_APPEND | LOCK_EX);
+
+        $this->info('Open Payroll has been sucessfully installed! Thanks for using Open Payroll!');
     }
 }
