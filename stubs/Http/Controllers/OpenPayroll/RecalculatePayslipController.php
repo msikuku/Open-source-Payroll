@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\OpenPayroll;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class RecalculatePayslipController extends Controller
 {
@@ -13,6 +13,6 @@ class RecalculatePayslipController extends Controller
 
         swal()->success('Payroll', 'You have successfully recalculate a payslip.');
 
-    	return redirect()->route('payslip.show', $id);
+        return redirect()->route('payslip.show', $id);
     }
 }

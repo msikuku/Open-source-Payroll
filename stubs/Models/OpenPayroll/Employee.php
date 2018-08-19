@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Models\OpenPayroll;
 
@@ -8,22 +8,22 @@ use CleaniqueCoders\Profile\Traits\Morphs\Bankable;
 
 class Employee extends User
 {
-	use HasProfile, Bankable;
-	
-	protected $table = 'users';
+    use HasProfile, Bankable;
 
-	public function salary()
-	{
-		return $this->hasOne(Salary::class, 'user_id');
-	}
+    protected $table = 'users';
 
-	public function position()
-	{
-		return $this->hasOne(Position::class, 'user_id');
-	}
+    public function salary()
+    {
+        return $this->hasOne(Salary::class, 'user_id');
+    }
 
-	public function payslips()
-	{
-		return $this->hasMany(Payslip::class, 'user_id');
-	}
+    public function position()
+    {
+        return $this->hasOne(Position::class, 'user_id');
+    }
+
+    public function payslips()
+    {
+        return $this->hasMany(Payslip::class, 'user_id');
+    }
 }

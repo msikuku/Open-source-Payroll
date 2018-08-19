@@ -1,8 +1,8 @@
-<?php 
+<?php
 
 namespace CleaniqueCoders\OpenPayroll\Contracts;
 
 interface CalculateContract
 {
-	public function calculate();
+    public function calculate();
 }

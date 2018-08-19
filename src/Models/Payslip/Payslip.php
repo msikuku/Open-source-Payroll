@@ -17,23 +17,24 @@ class Payslip extends Model
     {
         return $this->belongsTo(config('open-payroll.models.payroll'));
     }
+
     public function getTitleAttribute()
-	{
-		return 'Payslip from ' . $this->payroll->title; 
-	}
+    {
+        return 'Payslip from ' . $this->payroll->title;
+    }
 
     public function employee()
     {
         return $this->belongsTo(config('open-payroll.models.employee'), config('open-payroll.models.employee_fk', 'user_id'));
     }
 
-	public function earnings()
-	{
-		return $this->hasMany(Earning::class);
-	}
+    public function earnings()
+    {
+        return $this->hasMany(Earning::class);
+    }
 
-	public function deductions()
-	{
-		return $this->hasMany(Deduction::class);
-	}
+    public function deductions()
+    {
+        return $this->hasMany(Deduction::class);
+    }
 }
