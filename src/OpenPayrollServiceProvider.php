@@ -16,7 +16,7 @@ class OpenPayrollServiceProvider extends ServiceProvider
          */
         $this->publishes([
             __DIR__ . '/../config/open-payroll.php' => config_path('open-payroll.php'),
-        ], 'open-payroll-config');
+        ], 'config');
 
         /*
          * Migration
@@ -24,7 +24,7 @@ class OpenPayrollServiceProvider extends ServiceProvider
         if (! class_exists('CreatePayrollTable')) {
             $this->publishes([
                 __DIR__ . '/../database/migrations/create_payroll_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_payroll_table.php'),
-            ], 'open-payroll-migrations');
+            ], 'migrations');
         }
 
         /*
@@ -33,13 +33,13 @@ class OpenPayrollServiceProvider extends ServiceProvider
         if (! class_exists('PayrollSeeder')) {
             $this->publishes([
                 __DIR__ . '/../database/seeds/PayrollSeeder.php' => database_path('seeds/PayrollSeeder.php'),
-            ], 'open-payroll-seeders');
+            ], 'seeders');
         }
 
         if (! class_exists('PayrollTestSeeder')) {
             $this->publishes([
                 __DIR__ . '/../database/seeds/PayrollTestSeeder.php' => database_path('seeds/PayrollTestSeeder.php'),
-            ], 'open-payroll-seeders');
+            ], 'seeders');
         }
 
         /*
@@ -47,7 +47,30 @@ class OpenPayrollServiceProvider extends ServiceProvider
          */
         $this->publishes([
             __DIR__ . '/../resources/views' => resource_path('views'),
-        ], 'open-payroll-views');
+        ], 'views');
+
+        /*
+         * Models
+         */
+        $this->publishes([
+            __DIR__ . '/../stubs/Models/OpenPayroll' => app_path('Models'),
+        ], 'models');
+
+        /*
+         * Controllers
+         */
+        $this->publishes([
+            __DIR__ . '/../stubs/Http/Controllers/OpenPayroll' => app_path('Http/Controllers'),
+        ], 'controllers');
+
+        /**
+         * Commands
+         */
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                Console\Commands\InstallCommand::class,
+            ]);
+        }
     }
 
     /**
