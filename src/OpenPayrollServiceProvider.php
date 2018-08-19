@@ -45,11 +45,9 @@ class OpenPayrollServiceProvider extends ServiceProvider
         /*
          * Views
          */
-        // $this->publishes([
-        //     __DIR__ . '/../resources/views' => resource_path('views/vendor/payroll'),
-        // ], self::PACKAGE_PREFIX);
-
-        // $this->loadViewsFrom(__DIR__ . '/../resources/views', 'payroll');
+        $this->publishes([
+            __DIR__ . '/../resources/views' => resource_path('views'),
+        ], 'open-payroll-views');
     }
 
     /**
