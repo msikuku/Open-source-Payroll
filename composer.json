@@ -28,7 +28,7 @@
     },
     "require": {
         "php": ">=7.1",
-        "cleaniquecoders/blueprint-macro": "^2.0",
+        "cleaniquecoders/blueprint-macro": "^2.1",
         "cleaniquecoders/laravel-helper": "^1.0",
         "cleaniquecoders/laravel-observers": "^1.0",
         "cleaniquecoders/money-wrapper": "^1.0",
