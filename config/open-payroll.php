@@ -23,6 +23,7 @@ return [
     ],
     'models' => [
         'user'             => \App\User::class,
+        'employee'         => \App\Models\Employee::class,
         'payroll'          => \CleaniqueCoders\OpenPayroll\Models\Payroll\Payroll::class,
         'payroll_statuses' => \CleaniqueCoders\OpenPayroll\Models\Payroll\Status::class,
         'payslip'          => \CleaniqueCoders\OpenPayroll\Models\Payslip\Payslip::class,
