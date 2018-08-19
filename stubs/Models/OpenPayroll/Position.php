@@ -10,6 +10,6 @@ class Position extends Model
 
     public function employee()
     {
-        return $this->belongsTo(\App\Models\Employee::class, 'user_id');
+        return $this->belongsTo(Employee::class, 'user_id');
     }
 }
