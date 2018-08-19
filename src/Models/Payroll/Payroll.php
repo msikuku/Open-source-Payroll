@@ -11,6 +11,15 @@ class Payroll extends Model
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'date' => 'datetime:Y-m-d',
+    ];
+
+    public function getTitleAttribute()
+    {
+        return 'Payroll for ' . \Carbon\Carbon::parse($this->year . '-' . $this->month . '-1')->format('M') . ' ' . $this->year;
+    }
+
     public function user()
     {
         return $this->belongsTo(config('open-payroll.models.user'));

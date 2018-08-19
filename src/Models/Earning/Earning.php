@@ -25,6 +25,6 @@ class Earning extends Model
 
     public function type()
     {
-        return $this->hasOne(config('open-payroll.models.earning_types'));
+        return $this->belongsTo(config('open-payroll.models.earning_types'), 'earning_type_id');
     }
 }

@@ -25,6 +25,6 @@ class Deduction extends Model
 
     public function type()
     {
-        return $this->hasOne(config('open-payroll.models.deduction_types'));
+        return $this->belongsTo(config('open-payroll.models.deduction_types'), 'deduction_type_id');
     }
 }
