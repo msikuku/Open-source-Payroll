@@ -23,8 +23,8 @@ class OpenPayrollServiceProvider extends ServiceProvider
          */
         if (! class_exists('CreatePayrollTable')) {
             $this->publishes([
-                __DIR__ . '/../database/migrations/create_payroll_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_payroll_table.php'),
-                __DIR__ . '/../database/migrations/create_positions.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_positions.php'),
+                __DIR__ . '/../database/migrations/create_payroll_table.php.stub'  => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_payroll_table.php'),
+                __DIR__ . '/../database/migrations/create_positions.php.stub'      => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_positions.php'),
                 __DIR__ . '/../database/migrations/create_salaries_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_salaries_table.php'),
             ], 'migrations');
         }
@@ -33,8 +33,7 @@ class OpenPayrollServiceProvider extends ServiceProvider
          * Seeders
          */
         $this->publishes([
-            __DIR__ . '/../database/seeds/PayrollSeeder.php'     => database_path('seeds/PayrollSeeder.php'),
-            __DIR__ . '/../database/seeds/PayrollTestSeeder.php' => database_path('seeds/PayrollTestSeeder.php'),
+            __DIR__ . '/../database/seeds/' => database_path('seeds/'),
         ], 'seeders');
 
         /*
@@ -64,6 +63,8 @@ class OpenPayrollServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 Console\Commands\InstallCommand::class,
+                Console\Commands\SeedOpenPayrollReferenceCommand::class,
+                Console\Commands\SeedDemoDataCommand::class,
             ]);
         }
     }
