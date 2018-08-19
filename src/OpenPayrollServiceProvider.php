@@ -24,6 +24,8 @@ class OpenPayrollServiceProvider extends ServiceProvider
         if (! class_exists('CreatePayrollTable')) {
             $this->publishes([
                 __DIR__ . '/../database/migrations/create_payroll_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_payroll_table.php'),
+                __DIR__ . '/../database/migrations/create_positions.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_positions.php'),
+                __DIR__ . '/../database/migrations/create_salaries_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_salaries_table.php'),
             ], 'migrations');
         }
 
