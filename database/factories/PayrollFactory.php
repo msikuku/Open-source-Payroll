@@ -3,6 +3,11 @@
 
 use Faker\Generator as Faker;
 
+$factory->define(\App\Models\OpenPayroll\Employee::class, function(Faker $faker) {
+    return [
+    ];
+});
+
 $factory->define(\CleaniqueCoders\OpenPayroll\Models\Payroll\Payroll::class, function(Faker $faker) {
     return [
     ];
