@@ -33,19 +33,60 @@ Youn can checkout the demo [here](https://open-payroll.cleaniquecoders.com/).
 $ composer require cleaniquecoders/open-payroll
 ```
 
-2. Then in your `config/app.php` add the following to the providers array:
+2. You can skip this step if your running Laravel 5.6 and above. Then in your `config/app.php` add the following to the providers array:
 
 ```php
 CleaniqueCoders\OpenPayroll\OpenPayrollServiceProvider::class,
 ```
 
-3. In the same `config/app.php` add the following to the aliases array:
+3. You can skip this step if your running Laravel 5.6 and above. In the same `config/app.php` add the following to the aliases array:
 
 ```php
 'OpenPayroll' => CleaniqueCoders\OpenPayroll\OpenPayrollFacade::class,
 ```
 
+4. Next, you need to install Open Payroll assets:
+
+```
+$ php artisan open-payroll:install
+$ php artisan migrate
+```
+
+5. Open Payroll use [Laravel Observer](https://github.com/cleaniquecoders/laravel-observers), so you need to publish Laravel Observers config file.
+
+```
+$ php artisan vendor:publish --tag=laravel-observers
+```
+
+Then add the Open Payroll models to the `config/observers.php` in `\CleaniqueCoders\LaravelObservers\Observers\HashidsObserver::class` key. This will allow the observer to create hashed slug for each record automatically.
+
+```php
+return [
+    \CleaniqueCoders\LaravelObservers\Observers\ReferenceObserver::class => [],
+    \CleaniqueCoders\LaravelObservers\Observers\HashidsObserver::class   => [
+    	\App\Models\OpenPayroll\Employee::class,
+    	\App\Models\OpenPayroll\Position::class,
+    	\App\Models\OpenPayroll\Salary::class,
+    	\App\Models\OpenPayroll\Admin::class,
+    	\App\Models\OpenPayroll\Payroll::class,
+    	\App\Models\OpenPayroll\Payslip::class,
+    	\App\Models\OpenPayroll\Earning::class,
+    	\App\Models\OpenPayroll\Deduction::class,
+    ],
+];
+```
+
+> You may use the observer for the other model as well.
+
+Then seed references data for Open Payroll:
+
+```
+$ php artisan open-payroll:seed
+```
+
 ## Usage
+
+When you are done the installation process, then you may login to your application.
 
 ## Test
 
