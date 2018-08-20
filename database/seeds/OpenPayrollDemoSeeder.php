@@ -73,17 +73,15 @@ class OpenPayrollDemoSeeder extends Seeder
     {
         $payrolls = \App\Models\OpenPayroll\Payroll::all();
 
-        \App\Models\OpenPayroll\Employee::with('salary')->get()->each(function($employee) use ($payrolls) {
+        \App\Models\OpenPayroll\Employee::has('salary')->with('salary')->get()->each(function($employee) use ($payrolls) {
             $payrolls->each(function($payroll) use ($employee) {
-                $payroll->payslips()->create([
+                $payslip = \App\Models\OpenPayroll\Payslip::create([
                     'user_id'      => $employee->id,
                     'payroll_id'   => $payroll->id,
                     'basic_salary' => optional($employee->salary)->amount ?? 0,
                     'gross_salary' => optional($employee->salary)->amount ?? 0,
                     'net_salary'   => optional($employee->salary)->amount ?? 0,
                 ]);
-
-                $payslip = $payroll->payslips()->first();
 
                 // earnings
                 \App\Models\OpenPayroll\Earning::create([
