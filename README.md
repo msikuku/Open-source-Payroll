@@ -19,11 +19,11 @@ Following are the features provided:
 - Payroll Report for Administrator
 - Payroll Report for Employee
 - Custom Earnings and Deductions 
-- Customasible earnings and deductions calculation process
+- Customisable earnings and deductions calculation process
 
 ## Demo Site
 
-Youn can checkout the demo [here](https://open-payroll.cleaniquecoders.com/).
+You can checkout the demo [here](https://open-payroll.cleaniquecoders.com/).
 
 ## Installation
 
