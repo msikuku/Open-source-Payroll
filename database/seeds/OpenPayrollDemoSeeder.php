@@ -86,7 +86,7 @@ class OpenPayrollDemoSeeder extends Seeder
                 $payslip = $payroll->payslips()->first();
 
                 // earnings
-                config('open-payroll.models.earning')::create([
+                \App\Models\OpenPayroll\Earning::create([
                     'user_id'         => $employee->id,
                     'payroll_id'      => $payroll->id,
                     'payslip_id'      => $payslip->id,

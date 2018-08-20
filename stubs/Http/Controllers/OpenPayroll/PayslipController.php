@@ -49,7 +49,7 @@ class PayslipController extends Controller
             'employees' => 'required',
         ]);
 
-        $payroll = \App\Models\OpenPayroll\Payroll::findByHashslugOrId($request->payroll);
+        $payroll = \App\Models\OpenPayroll\Payroll::findByHashSlugOrId($request->payroll);
 
         $employees = $request->employees;
         foreach ($employees as $hashslug) {

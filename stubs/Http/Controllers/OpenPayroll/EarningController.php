@@ -43,7 +43,7 @@ class EarningController extends Controller
             'amount'  => 'required',
         ]);
 
-        $payslip = \App\Models\OpenPayroll\Payslip::with('payroll', 'user')->findByHashslugOrId($request->payslip);
+        $payslip = \App\Models\OpenPayroll\Payslip::with('payroll', 'user')->findByHashSlugOrId($request->payslip);
         $type    = \App\Models\OpenPayroll\EarningType::find($request->type);
 
         $payslip->earnings()->create([

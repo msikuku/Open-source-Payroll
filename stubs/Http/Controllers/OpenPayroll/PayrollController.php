@@ -65,7 +65,7 @@ class PayrollController extends Controller
      */
     public function show($id)
     {
-        $payroll = \App\Models\OpenPayroll\Payroll::with('payslips', 'payslips.user')->findByHashslugOrId($id);
+        $payroll = \App\Models\OpenPayroll\Payroll::with('payslips', 'payslips.user')->findByHashSlugOrId($id);
 
         return view('payroll.show', compact('payroll'));
     }
