@@ -2,6 +2,8 @@
 
 namespace CleaniqueCoders\OpenPayroll\Models\Payslip;
 
+use CleaniqueCoders\OpenPayroll\Models\Earning\Earning;
+use CleaniqueCoders\OpenPayroll\Models\Earning\Deduction;
 use Illuminate\Database\Eloquent\Model;
 
 class Payslip extends Model
@@ -30,11 +32,11 @@ class Payslip extends Model
 
     public function earnings()
     {
-        return $this->hasMany(Earning::class);
+        return $this->hasMany(config('open-payroll.models.earning'));
     }
 
     public function deductions()
     {
-        return $this->hasMany(Deduction::class);
+        return $this->hasMany(config('open-payroll.models.deduction'));
     }
 }
