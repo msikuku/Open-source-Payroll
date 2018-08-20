@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Create New Deduction') }}</div>
+            <div class="card bg-white border-0 shadow-sm rounded">
+                <div class="card-header bg-white border-0">{{ __('Create New Deduction') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('deduction.store', ['payslip' => request()->payslip]) }}" aria-label="{{ __('Create New Deduction') }}">
@@ -18,6 +18,22 @@
                                     <option value="{{ $type->id }}">{{ $type->name }}</option>
                                 @endforeach
                             </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">{{ __('Description:') }}</label>
+                            
+                            <input id="description" type="text" 
+                                class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" 
+                                name="description" value="{{ old('description') }}" 
+                                autofocus>
+                            <small class="text-muted pull-right">{{ __('(Optional)') }}</small>
+
+                            @if ($errors->has('description'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('description') }}</strong>
+                                </span>
+                            @endif
                         </div>
 
                         <div class="form-group">
