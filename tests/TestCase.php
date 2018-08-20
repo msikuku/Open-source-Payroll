@@ -14,23 +14,11 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         parent::setUp();
 
-        $this->artisan('vendor:publish', [
-            '--force' => true,
-            '--tag'   => 'open-payroll-config',
-        ]);
-
-        $this->artisan('vendor:publish', [
-            '--force' => true,
-            '--tag'   => 'open-payroll-migrations',
-        ]);
-
-        $this->artisan('vendor:publish', [
-            '--force' => true,
-            '--tag'   => 'open-payroll-seeders',
-        ]);
+        $this->artisan('open-payroll:install');
 
         $this->loadLaravelMigrations(['--database' => 'testbench']);
         $this->artisan('migrate', ['--database' => 'testbench']);
+        $this->artisan('open-payroll:seed');
     }
 
     public function tearDown()

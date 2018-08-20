@@ -11,15 +11,27 @@ class BaseOpenPayrollTest extends TestCase
     }
 
     /** @test */
-    public function it_has_helper()
+    public function it_has_payroll_helper()
     {
         $this->assertHasHelper('payroll');
+    }
+
+    /** @test */
+    public function it_has_payslip_helper()
+    {
+        $this->assertHasHelper('payslip');
     }
 
     /** @test */
     public function it_has_payroll_processor()
     {
         $this->assertHasClass(\CleaniqueCoders\OpenPayroll\Processors\PayrollProcessor::class);
+    }
+
+    /** @test */
+    public function it_has_payslip_processor()
+    {
+        $this->assertHasClass(\CleaniqueCoders\OpenPayroll\Processors\PayslipProcessor::class);
     }
 
     /** @test */
@@ -77,6 +89,6 @@ class BaseOpenPayrollTest extends TestCase
     /** @test */
     public function it_has_published_seeders()
     {
-        $this->assertHasClass('PayrollSeeder');
+        $this->assertHasClass('OpenPayrollSeeder');
     }
 }

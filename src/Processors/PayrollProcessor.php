@@ -20,7 +20,7 @@ class PayrollProcessor implements CalculateContract
         return new self($identifier);
     }
 
-    public function payroll(Payroll $payroll)
+    public function payroll($payroll)
     {
         $this->payroll = $payroll;
 

@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Processors;
+namespace CleaniqueCoders\OpenPayroll\Processors;
 
-use App\Contracts\CalculateContract;
-use App\Models\Payslip;
+use CleaniqueCoders\OpenPayroll\Contracts\CalculateContract;
 
 class PayslipProcessor implements CalculateContract
 {
@@ -13,7 +12,7 @@ class PayslipProcessor implements CalculateContract
     {
         if (! is_null($identifier)) {
             if (is_string($identifier) || is_int($identifier)) {
-                $this->payslip = Payslip::query()
+                $this->payslip = config('open-payroll.models.payslip')::query()
                     ->with('earnings', 'deductions', 'payroll', 'employee', 'employee.salary')
                     ->whereId($identifier)
                     ->orWhere('hashslug', $identifier)
@@ -31,7 +30,7 @@ class PayslipProcessor implements CalculateContract
         return new self($identifier);
     }
 
-    public function payslip(Payslip $payslip)
+    public function payslip($payslip)
     {
         $this->payslip = $payslip;
 

@@ -22,8 +22,8 @@ class PayrollDatabaseTest extends TestCase
     /** @test */
     public function it_has_seeders()
     {
-        $this->assertHasClass('PayrollSeeder');
-        $this->assertHasClass('PayrollTestSeeder');
+        $this->assertHasClass('OpenPayrollSeeder');
+        $this->assertHasClass('OpenPayrollDemoSeeder');
     }
 
     /** @test */

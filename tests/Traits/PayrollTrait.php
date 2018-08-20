@@ -12,7 +12,7 @@ trait PayrollTrait
 
     public function seedPayrollSeeder()
     {
-        $this->artisan('db:seed', ['--class' => 'PayrollSeeder']);
+        $this->artisan('db:seed', ['--class' => 'OpenPayrollSeeder']);
     }
 
     public function seedOnePayrollData()
