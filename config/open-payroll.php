@@ -12,6 +12,7 @@ return [
             'Overtime',
             'Allowance',
             'Bonus',
+            'Claim',
             'Other',
         ],
         'payroll_statuses' => [

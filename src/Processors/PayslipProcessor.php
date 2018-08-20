@@ -46,9 +46,28 @@ class PayslipProcessor implements CalculateContract
             $earnings   = $this->payslip->earnings;
             $deductions = $this->payslip->deductions;
 
-            $this->payslip->basic_salary = $salary->amount;
-            $this->payslip->gross_salary = $gross_salary = ($earnings->sum('amount') + $salary->amount);
-            $this->payslip->net_salary   = $gross_salary - $deductions->sum('amount');
+            $this->payslip->basic_salary = $gross_salary = $net_salary = $salary->amount;
+            foreach ($earnings as $earning) {
+                $class = 'CleaniqueCoders\OpenPayroll\Processors\Earning\\' . studly_case($earning->type->name) . 'EarningProcessor';
+                if(class_exists($class)) {
+                    $gross_salary += $class::make($earning)->calculate();
+                } else {
+                    $gross_salary += $earning->amount;
+                }
+            }
+
+            $deduction_amount = 0;
+            foreach ($deductions as $deduction) {
+                $class = 'CleaniqueCoders\OpenPayroll\Processors\Deduction\\' . studly_case($deduction->type->name) . 'DeductionProcessor';
+                if(class_exists($class)) {
+                    $deduction_amount += $class::make($deduction)->calculate();
+                } else {
+                    $deduction_amount += $earning->amount;
+                }
+            }
+
+            $this->payslip->gross_salary = $gross_salary;
+            $this->payslip->net_salary   = $gross_salary - $deduction_amount;
 
             $this->payslip->save();
         }
