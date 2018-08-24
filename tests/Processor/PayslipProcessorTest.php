@@ -15,32 +15,30 @@ class PayslipProcessor extends TestCase
         $this->seedUsers();
         $this->seedOnePayrollData();
         $this->seedOnePayslipData();
+        $this->seedEarningData();
+        $this->seedDeductionData();
     }
 
     /** @test */
-    public function it_has_payroll_date()
+    public function it_has_payroll_data()
     {
     	$this->assertTrue(config('open-payroll.models.payroll')::count() > 0);
     }
 
     /** @test */
-    public function it_has_payslip_date()
+    public function it_has_payslip_data()
     {
     	$this->assertTrue(config('open-payroll.models.payslip')::count() > 0);
     }
 
-    /**
-     * @todo seed data, then assert
-     */
-    public function it_has_earning_date()
+    /** @test */
+    public function it_has_earning_data()
     {
     	$this->assertTrue(config('open-payroll.models.earning')::count() > 0);
     }
 
-    /**
-     * @todo seed data, then assert
-     */
-    public function it_has_deduction_date()
+    /** @test */
+    public function it_has_deduction_data()
     {
     	$this->assertTrue(config('open-payroll.models.deduction')::count() > 0);
     }

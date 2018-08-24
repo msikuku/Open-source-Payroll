@@ -15,6 +15,11 @@ trait PayrollTrait
         $this->artisan('db:seed', ['--class' => 'OpenPayrollSeeder']);
     }
 
+    public function getAPayroll()
+    {
+        return $this->payroll = Payroll::with('payslips', 'payslips.earnings', 'payslips.deductions')->first();
+    }
+
     public function seedOnePayrollData()
     {
         $this->user = $user = \DB::table('users')->first();
@@ -36,10 +41,5 @@ trait PayrollTrait
             'year'    => 2018,
             'date'    => '2018-08-1',
         ]);
-    }
-
-    public function getAPayroll()
-    {
-        return Payroll::first();
     }
 }
