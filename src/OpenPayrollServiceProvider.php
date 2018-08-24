@@ -16,7 +16,7 @@ class OpenPayrollServiceProvider extends ServiceProvider
          */
         $this->publishes([
             __DIR__ . '/../config/open-payroll.php' => config_path('open-payroll.php'),
-        ], 'config');
+        ], 'open-payroll-config');
 
         /*
          * Database - Migrations, Factories and Seeders
@@ -27,7 +27,7 @@ class OpenPayrollServiceProvider extends ServiceProvider
                 __DIR__ . '/../database/migrations/create_payroll_table.php.stub'   => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_payroll_table.php'),
                 __DIR__ . '/../database/migrations/create_positions_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_positions_table.php'),
                 __DIR__ . '/../database/migrations/create_salaries_table.php.stub'  => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_salaries_table.php'),
-            ], 'database');
+            ], 'open-payroll-database');
         }
 
         /*
@@ -35,7 +35,7 @@ class OpenPayrollServiceProvider extends ServiceProvider
          */
         $this->publishes([
             __DIR__ . '/../resources/views' => resource_path('views'),
-        ], 'views');
+        ], 'open-payroll-views');
 
         /*
          * Models & Controllers
@@ -43,7 +43,7 @@ class OpenPayrollServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../stubs/Models'           => app_path('Models'),
             __DIR__ . '/../stubs/Http/Controllers' => app_path('Http/Controllers'),
-        ], 'app');
+        ], 'open-payroll-app');
 
         /*
          * Commands
