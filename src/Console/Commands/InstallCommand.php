@@ -46,7 +46,7 @@ class InstallCommand extends Command
             $file  = base_path('routes/web.php');
             file_put_contents($file, $route, FILE_APPEND | LOCK_EX);
         }
-
+        $this->line(' ');
         $this->info('Open Payroll has been sucessfully installed! Thanks for using Open Payroll!');
     }
 }

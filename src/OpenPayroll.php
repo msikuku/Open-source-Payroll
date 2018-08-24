@@ -2,27 +2,10 @@
 
 namespace CleaniqueCoders\OpenPayroll;
 
-/*
- * This file is part of open-payroll
- *
- * @license MIT
- * @package open-payroll
- */
+use Illuminate\Support\Facades\Route;
 
-use Illuminate\Support\Facades\Facade;
-
-class OpenPayrollFacade extends Facade
+class OpenPayroll
 {
-    /**
-     * Get the registered name of the component.
-     *
-     * @return string
-     */
-    protected static function getFacadeAccessor()
-    {
-        return 'OpenPayroll';
-    }
-
     /**
      * Binds the Passport routes into the controller.
      *

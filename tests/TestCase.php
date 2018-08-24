@@ -28,6 +28,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
             ->concat(glob(database_path('migrations/*.php')))
             ->concat(glob(database_path('seeds/*.php')))
             ->concat(glob(database_path('factories/*.php')))
+            ->concat(glob(app_path('Models/OpenPayroll/*.php')))
+            ->concat(glob(app_path('Http/Controllers/OpenPayroll/*.php')))
             ->each(function($path) {
                 $this->removeIfExist($path);
             });
@@ -68,6 +70,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
             \CleaniqueCoders\LaravelObservers\LaravelObserversServiceProvider::class,
             \CleaniqueCoders\LaravelHelper\LaravelHelperServiceProvider::class,
             \CleaniqueCoders\Blueprint\Macro\BlueprintMacroServiceProvider::class,
+            \CleaniqueCoders\OpenPayroll\Tests\Stubs\Providers\TestServiceProvider::class,
         ];
     }
 
