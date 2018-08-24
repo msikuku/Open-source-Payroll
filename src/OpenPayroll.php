@@ -18,7 +18,7 @@ class OpenPayroll
             $router->all();
         };
         $defaultOptions = [
-            'prefix'    => 'OpenPayroll',
+            'prefix'    => 'open-payroll',
             'as'        => 'open-payroll.',
             'namespace' => 'OpenPayroll',
         ];
