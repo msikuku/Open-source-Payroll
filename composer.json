@@ -42,7 +42,10 @@
         "laravel": {
             "providers": [
                 "CleaniqueCoders\\OpenPayroll\\OpenPayrollServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "OpenPayroll": "CleaniqueCoders\\OpenPayroll\\OpenPayrollFacade"
+            }
         }
     },
     "config": {
