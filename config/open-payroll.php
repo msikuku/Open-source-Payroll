@@ -2,6 +2,17 @@
 
 
 return [
+    /*
+    |--------------------------------------------------------------------------
+    | Open Payroll Seeder Data
+    |--------------------------------------------------------------------------
+    |
+    | These values is the default for the references data which refer to
+    | deduction types, earning types, payroll and payslip statuses.
+    | You may add / remove as necessary for your needs.
+    |
+    */
+   
     'seeds' => [
         'deduction_types' => [
             'Loan',
@@ -22,6 +33,17 @@ return [
             'Active', 'Inactive', 'Locked',
         ],
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Open Payroll Models
+    |--------------------------------------------------------------------------
+    |
+    | These values is the default for the models used in Open Payroll.
+    | You may extend / replace the following models as necessary.
+    |
+    */
+
     'models' => [
         'user'             => \App\User::class,
         'employee'         => \App\Models\OpenPayroll\Employee::class,
@@ -34,6 +56,17 @@ return [
         'earning'          => \CleaniqueCoders\OpenPayroll\Models\Earning\Earning::class,
         'earning_types'    => \CleaniqueCoders\OpenPayroll\Models\Earning\Type::class,
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Open Payroll Tables
+    |--------------------------------------------------------------------------
+    |
+    | These values is the tables used in Open Payroll. Changing these values
+    | require additional setup on seeders and models.
+    |
+    */
+   
     'tables' => [
         'names' => [
             'earnings',
@@ -45,4 +78,31 @@ return [
             'deduction_types',
         ],
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Open Payroll Payslip Processors
+    |--------------------------------------------------------------------------
+    |
+    | These values is the default processors for earnings and deductions.
+    | By default, no processors required for each earning and deductions.
+    |
+    */
+   
+   'processors' => [
+        'default_earning' => \CleaniqueCoders\OpenPayroll\Processors\Earning\BaseEarningProcessor::class,
+        'default_deduction' => \CleaniqueCoders\OpenPayroll\Processors\Earning\BaseEarningProcessor::class,
+        'earnings' => [
+            'Basic' => \CleaniqueCoders\OpenPayroll\Processors\Earning\BasicEarningProcessor::class,
+            'Overtime' => \CleaniqueCoders\OpenPayroll\Processors\Earning\OvertimeEarningProcessor::class,
+            'Allowance' => \CleaniqueCoders\OpenPayroll\Processors\Earning\AllowanceEarningProcessor::class,
+            'Bonus' => \CleaniqueCoders\OpenPayroll\Processors\Earning\BonusEarningProcessor::class,
+            'Claim' => \CleaniqueCoders\OpenPayroll\Processors\Earning\ClaimEarningProcessor::class,
+            'Other' => \CleaniqueCoders\OpenPayroll\Processors\Earning\OtherEarningProcessor::class,
+        ],
+        'deductions' => [
+            'Loan' => \CleaniqueCoders\OpenPayroll\Processors\Deduction\LoanProcessor::class,
+            'IncomeTax' => \CleaniqueCoders\OpenPayroll\Processors\Deduction\IncomeTaxProcessor::class,
+        ],
+   ]
 ];
