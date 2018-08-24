@@ -5,6 +5,4 @@
 |--------------------------------------------------------------------------
 */
 
-\CleaniqueCoders\OpenPayroll\OpenPayroll::routes(null, [
-	'namespace' => '\App\Http\Controllers'
-]);
+\CleaniqueCoders\OpenPayroll\OpenPayroll::routes();
