@@ -12,7 +12,7 @@ return [
     | You may add / remove as necessary for your needs.
     |
     */
-   
+
     'seeds' => [
         'deduction_types' => [
             'Loan',
@@ -66,7 +66,7 @@ return [
     | require additional setup on seeders and models.
     |
     */
-   
+
     'tables' => [
         'names' => [
             'earnings',
@@ -88,21 +88,21 @@ return [
     | By default, no processors required for each earning and deductions.
     |
     */
-   
+
    'processors' => [
-        'default_earning' => \CleaniqueCoders\OpenPayroll\Processors\Earning\BaseEarningProcessor::class,
+        'default_earning'   => \CleaniqueCoders\OpenPayroll\Processors\Earning\BaseEarningProcessor::class,
         'default_deduction' => \CleaniqueCoders\OpenPayroll\Processors\Earning\BaseEarningProcessor::class,
-        'earnings' => [
-            'Basic' => \CleaniqueCoders\OpenPayroll\Processors\Earning\BasicEarningProcessor::class,
-            'Overtime' => \CleaniqueCoders\OpenPayroll\Processors\Earning\OvertimeEarningProcessor::class,
+        'earnings'          => [
+            'Basic'     => \CleaniqueCoders\OpenPayroll\Processors\Earning\BasicEarningProcessor::class,
+            'Overtime'  => \CleaniqueCoders\OpenPayroll\Processors\Earning\OvertimeEarningProcessor::class,
             'Allowance' => \CleaniqueCoders\OpenPayroll\Processors\Earning\AllowanceEarningProcessor::class,
-            'Bonus' => \CleaniqueCoders\OpenPayroll\Processors\Earning\BonusEarningProcessor::class,
-            'Claim' => \CleaniqueCoders\OpenPayroll\Processors\Earning\ClaimEarningProcessor::class,
-            'Other' => \CleaniqueCoders\OpenPayroll\Processors\Earning\OtherEarningProcessor::class,
+            'Bonus'     => \CleaniqueCoders\OpenPayroll\Processors\Earning\BonusEarningProcessor::class,
+            'Claim'     => \CleaniqueCoders\OpenPayroll\Processors\Earning\ClaimEarningProcessor::class,
+            'Other'     => \CleaniqueCoders\OpenPayroll\Processors\Earning\OtherEarningProcessor::class,
         ],
         'deductions' => [
-            'Loan' => \CleaniqueCoders\OpenPayroll\Processors\Deduction\LoanProcessor::class,
+            'Loan'      => \CleaniqueCoders\OpenPayroll\Processors\Deduction\LoanProcessor::class,
             'IncomeTax' => \CleaniqueCoders\OpenPayroll\Processors\Deduction\IncomeTaxProcessor::class,
         ],
-   ]
+   ],
 ];

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\OpenPayroll\Setting;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use \App\Models\OpenPayroll\EarningType;
+use App\Models\OpenPayroll\EarningType;
+use Illuminate\Http\Request;
 
 class EarningController extends Controller
 {
@@ -15,7 +15,6 @@ class EarningController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -31,7 +30,8 @@ class EarningController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,8 +41,8 @@ class EarningController extends Controller
         ]);
 
         EarningType::create([
-            'name' => $request->name,
-            'code' => kebab_case($request->name, ''),
+            'name'      => $request->name,
+            'code'      => kebab_case($request->name, ''),
             'is_locked' => false,
         ]);
 
@@ -54,42 +54,45 @@ class EarningController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $type = EarningType::findOrFail($id);
+
         return view('open-payroll.settings.earning.edit', compact('type'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-         $this->validate($request, [
+        $this->validate($request, [
             'name' => 'required|min:3|max:255',
         ]);
 
         EarningType::whereId($id)->update([
-            'name' => $request->name,
-            'code' => kebab_case($request->name, ''),
+            'name'      => $request->name,
+            'code'      => kebab_case($request->name, ''),
             'is_locked' => false,
         ]);
 
@@ -101,7 +104,8 @@ class EarningController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

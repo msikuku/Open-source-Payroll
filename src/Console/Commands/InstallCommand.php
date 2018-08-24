@@ -40,8 +40,7 @@ class InstallCommand extends Command
             '--force'    => true,
         ]);
 
-        if('testing' != app()->environment())
-        {
+        if ('testing' != app()->environment()) {
             $route = file_get_contents(__DIR__ . '/stubs/routes/web.php.stub');
             $file  = base_path('routes/web.php');
             file_put_contents($file, $route, FILE_APPEND | LOCK_EX);

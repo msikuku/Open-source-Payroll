@@ -2,8 +2,8 @@
 
 namespace CleaniqueCoders\OpenPayroll\Models\Payslip;
 
-use CleaniqueCoders\OpenPayroll\Models\Earning\Earning;
 use CleaniqueCoders\OpenPayroll\Models\Earning\Deduction;
+use CleaniqueCoders\OpenPayroll\Models\Earning\Earning;
 use Illuminate\Database\Eloquent\Model;
 
 class Payslip extends Model

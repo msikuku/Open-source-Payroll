@@ -5,8 +5,8 @@ use Faker\Generator as Faker;
 
 $factory->define(\App\Models\OpenPayroll\Employee::class, function(Faker $faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->email,
+        'name'     => $faker->name,
+        'email'    => $faker->unique()->email,
         'password' => bcrypt('password'),
     ];
 });

@@ -4,7 +4,7 @@ namespace CleaniqueCoders\OpenPayroll\Processors\Earning;
 
 class BaseEarningProcessor
 {
-	public $earning;
+    public $earning;
 
     public function __construct($identifier)
     {
@@ -31,5 +31,5 @@ class BaseEarningProcessor
         return $this;
     }
 
-	abstract public function calculate();
+    abstract public function calculate();
 }

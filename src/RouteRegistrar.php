@@ -17,8 +17,7 @@ class RouteRegistrar
     /**
      * Create a new route registrar instance.
      *
-     * @param  \Illuminate\Contracts\Routing\Registrar  $router
-     * @return void
+     * @param \Illuminate\Contracts\Routing\Registrar $router
      */
     public function __construct(Router $router)
     {
@@ -27,12 +26,10 @@ class RouteRegistrar
 
     /**
      * Register routes.
-     *
-     * @return void
      */
     public function all()
     {
-        $this->router->group(['middleware' => ['web', 'auth']], function ($router) {
+        $this->router->group(['middleware' => ['web', 'auth']], function($router) {
             $router->resource('payroll', 'PayrollController');
             $router->resource('payslip', 'PayslipController');
             $router->resource('earning', 'EarningController');
@@ -44,8 +41,8 @@ class RouteRegistrar
 
             $this->router->group([
                     'namespace' => 'Setting',
-                    'prefix' => 'setting',
-                    'as' => 'setting.'
+                    'prefix'    => 'setting',
+                    'as'        => 'setting.',
                 ], function($router) {
                     $router->resource('deduction', 'DeductionController');
                     $router->resource('earning', 'EarningController');
