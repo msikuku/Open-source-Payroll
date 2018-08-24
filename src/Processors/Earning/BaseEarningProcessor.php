@@ -2,34 +2,24 @@
 
 namespace CleaniqueCoders\OpenPayroll\Processors\Earning;
 
-class BaseEarningProcessor
+use CleaniqueCoders\OpenPayroll\Contracts\CalculateContract;
+use CleaniqueCoders\OpenPayroll\Traits\MakeInstance;
+
+class BaseEarningProcessor implements CalculateContract
 {
-    public $earning;
+    use MakeInstance;
 
-    public function __construct($identifier)
+    public function getModel()
     {
-        if (is_string($identifier) || is_int($identifier)) {
-            $this->earning = config('open-payroll.models.earning')::query()
-                ->with('type')
-                ->findByHashSlugOrId($identifier);
-        }
-
-        if (is_object($identifier)) {
-            $this->earning($identifier);
-        }
-    }
-
-    public static function make($identifier)
-    {
-        return new self($identifier);
+        return config('open-payroll.models.earning');
     }
 
     public function earning($earning)
     {
-        $this->earning = $earning;
-
-        return $this;
+        return $this->instance($earning);
     }
 
-    abstract public function calculate();
+    public function calculate()
+    {
+    }
 }

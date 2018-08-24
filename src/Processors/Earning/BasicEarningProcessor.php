@@ -6,6 +6,6 @@ class BasicEarningProcessor extends BaseEarningProcessor
 {
     public function calculate()
     {
-        return $earning->amount;
+        return $this->earning->amount;
     }
 }

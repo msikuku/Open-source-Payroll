@@ -2,34 +2,24 @@
 
 namespace CleaniqueCoders\OpenPayroll\Processors\Deduction;
 
-class BaseDeductionProcessor
+use CleaniqueCoders\OpenPayroll\Contracts\CalculateContract;
+use CleaniqueCoders\OpenPayroll\Traits\MakeInstance;
+
+class BaseDeductionProcessor implements CalculateContract
 {
-    public $deduction;
+    use MakeInstance;
 
-    public function __construct($identifier)
+    public function getModel()
     {
-        if (is_string($identifier) || is_int($identifier)) {
-            $this->deduction = config('open-payroll.models.deduction')::query()
-                ->with('type')
-                ->findByHashSlugOrId($identifier);
-        }
-
-        if (is_object($identifier)) {
-            $this->deduction($identifier);
-        }
-    }
-
-    public static function make($identifier)
-    {
-        return new self($identifier);
+        return config('open-payroll.models.deduction');
     }
 
     public function deduction($deduction)
     {
-        $this->deduction = $deduction;
-
-        return $this;
+        return $this->instance($deduction);
     }
 
-    abstract public function calculate();
+    public function calculate()
+    {
+    }
 }
