@@ -45,14 +45,24 @@ CleaniqueCoders\OpenPayroll\OpenPayrollServiceProvider::class,
 'OpenPayroll' => CleaniqueCoders\OpenPayroll\OpenPayrollFacade::class,
 ```
 
-4. Next, you need to install Open Payroll assets:
+4. If you're running Laravel 5.8 or above you need to alter the users table migration.
+
+```php
+// Change:
+$table->bigIncrements('id');
+
+// To:
+$table->increments('id');
+```
+
+5. Next, you need to install Open Payroll assets:
 
 ```
 $ php artisan open-payroll:install
 $ php artisan migrate
 ```
 
-5. Open Payroll use [Laravel Observer](https://github.com/cleaniquecoders/laravel-observers), so you need to publish Laravel Observers config file.
+6. Open Payroll use [Laravel Observer](https://github.com/cleaniquecoders/laravel-observers), so you need to publish Laravel Observers config file.
 
 ```
 $ php artisan vendor:publish --tag=laravel-observers
